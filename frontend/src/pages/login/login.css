@@ -1,0 +1,16 @@
+.vertical-center {
+    margin: 0;
+    position: relative;
+    display: flex;
+    /* translate: ; */
+    /* align-items: center;
+    justify-content: center; */
+    /* top: 150%; */
+    
+    /* -ms-transform: translateY(50%); */
+    transform: translateY(150%);
+  } 
+
+.userimg{
+    width: 1em;
+}

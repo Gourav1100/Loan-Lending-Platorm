@@ -9,10 +9,13 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+
     <BrowserRouter>
       <Routes>
         <Route path = "/" element={<App />}>
@@ -22,8 +25,16 @@ root.render(
           <Route path = "/requests" element = {<Request />} />
         </Route>
       </Routes>
-
     </BrowserRouter>
+
+    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+      crossorigin></script>
+    <script
+      src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+      crossorigin></script>
+    <script>var Alert = ReactBootstrap.Alert;</script>
   </React.StrictMode>
 );
 
