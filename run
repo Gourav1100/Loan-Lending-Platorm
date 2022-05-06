@@ -1,0 +1,9 @@
+#!/bin/bash
+
+clear
+node server.js &
+cd ./frontend
+clear
+npm start
+cd ..
+clear
