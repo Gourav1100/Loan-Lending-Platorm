@@ -3,6 +3,7 @@
 clear
 node server.js &
 cd ./frontend
+npm install
 clear
 npm start
 cd ..
