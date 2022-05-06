@@ -11,6 +11,8 @@ import {
 } from "react-bootstrap";
 import userimg from "../../icons/user.png";
 import padlock from "../../icons/padlock.png";
+import google from "../../icons/google.png";
+import "../../common.css"
 
 class Login extends react.Component {
   clicked = (event) => {
@@ -19,12 +21,13 @@ class Login extends react.Component {
   render() {
     return (
       <>
-        <Container classname="">
-          <Row>
-            <Col xs={{ offset: 4, span: 4 }}>
-              <Stack gap={2} className="my-auto vertical-center">
+        <Container>
+          <Row className="vcon">
+            <Col xs={{span: 1 }} md = {{span : 3}} lg = {{span : 4}} />
+            <Col xs={{span: 10 }} md = {{span : 6}} lg = {{span : 4}}>
+              <Stack gap={2}>
                 <InputGroup className="mb-3 ">
-                  <InputGroup.Text id="basic-addon1"><img className = "userimg" src = {userimg}></img></InputGroup.Text>
+                  <InputGroup.Text id="basic-addon1"><img className = "img_size" src = {userimg}></img></InputGroup.Text>
                   <FormControl
                     placeholder="Username"
                     aria-label="Username"
@@ -32,8 +35,8 @@ class Login extends react.Component {
                   />
                 </InputGroup>
 
-                <InputGroup className="mb-3 align-items-center">
-                  <InputGroup.Text id="basic-addon1"><img className = "padlock" src = {padlock}></img></InputGroup.Text>
+                <InputGroup className="mb-3 ">
+                  <InputGroup.Text id="basic-addon1"><img className = "img_size" src = {padlock}></img></InputGroup.Text>
                   <FormControl
                     placeholder="Password"
                     aria-label="Password"
@@ -41,13 +44,22 @@ class Login extends react.Component {
                   />
                 </InputGroup>
 
-                <Button onClick={this.clicked} variant="secondary">
+                <button className = "button_bg p-1" onClick={this.clicked}>
                   Login
-                </Button>
+                </button>
+                <hr className="h_break"></hr>
+                <button className = "button_bg   "><span className="lg_font">Sign in with</span> <img className = "img_size" src = {google}></img></button>
+                <hr className="h_break"></hr>
+                
+            
               </Stack>
+              
             </Col>
+            <Col xs={{span: 1 }} md = {{span : 3}} lg = {{span : 4}} />
           </Row>
+          
         </Container>
+     
       </>
     );
   }
