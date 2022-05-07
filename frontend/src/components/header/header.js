@@ -1,13 +1,13 @@
 import react from "react";
-import "./header.css";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import "./header.css";
 
 class Header extends react.Component {
     render(){
         return (
-            <div>
-                <Navbar bg = "dark" expand = "lg" variant = "dark">
-                    <Container>
+            <div className ="header" >
+                <Navbar bg = "dark" expand = "lg" variant = "dark" className="p-3">
+                    <Container fluid>
                         <Navbar.Brand href="#home">Loan</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">

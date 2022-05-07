@@ -1,4 +1,5 @@
 .header {
-    font-size: 1.45em;
+    position: relative;
+    font-size: 10em;
     z-index: 1;
 }
