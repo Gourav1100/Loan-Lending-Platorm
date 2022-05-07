@@ -12,7 +12,7 @@ app.all("*", (req, res, func) => {
             api.execute(req, res);
         }
         catch(err){
-            console.log(`Failed to load .${req.url} !`)
+            console.log(`Failed to load .${req.url} ! \n error: ${err.message}`)
             res.status(200).json({
                 success: false,
                 message: "Invalid API Url ",
