@@ -65,31 +65,49 @@ async function update(req, res) {
         }
         else if( query.type === "LoanHistory" ) {
             udata = {
-                LoanID: query.LoanID,
-                Borrower: query.Borrower,
-                Lender: query.Lender,
-                Amount: query.Amount,
-                InterestRate: query.InterestRate,
-                Time: query.Time,
+                loanid: query.loanid,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                interestrate: query.interestrate,
+                time: query.time,
+                paid: query.paid,
             }
         }
         else if(query.type === "LoanRequest"){
             udata = {
-                RequestID: query.RequestID,
-                Borrower: query.Borrower,
-                Amount: query.Amount,
-                InterestRate: query.InterestRate,
-                Time:query.Time,
-                Offeres: query.Offers,
+                requestid: query.requestid,
+                borrower: query.borrower,
+                amount: query.amount,
+                interestrate: query.interestrate,
+                time:query.time,
+                offeres: query.offers,
             }
 
         }
         else if(query.type === "LoanOffer"){
             udata = {
-                OfferID: query.OfferID,
-                RequestID: query.RequestID,
-                Borrower: query.Borrower,
-                Lender: query.Lender,
+                offerid: query.offerid,
+                requestid: query.requestid,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                interestrate: query.interestrate,
+                time: query.time,
+            }
+        }
+        else if(query.type === "ActiveLoans"){
+            udata = {
+                loanid: query.loanid,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                payable: query.payable,
+                interestrate: query.interestrate,
+                daysemi: query.daysemi,
+                emi: query.emi,
+                penalty: query.penalty,
+                emileft: query.emileft,
             }
         }
         else{
@@ -149,7 +167,7 @@ async function add(req, res) {
         // set user query
         let query = req.body;
         //  set add data
-        let adata;
+        let adata = {};
         if(query.type === "Users"){
             adata = {
                 username: query.username,
@@ -174,31 +192,72 @@ async function add(req, res) {
                 loansrepaid: query.loansrepaid,
             }
         }
-        else if( type === "post" ) {
+        else if( query.type === "LoanHistory" ) {
             adata = {
-                description: query.description,
-                title: query.title,
-                images: query.images,
-                videos: query.videos,
+                loanid: query.loanid,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                interestrate: query.interestrate,
+                time: query.time,
+                paid: query.paid,
+            }
+        }
+        else if(query.type === "LoanRequest"){
+            adata = {
+                requestid: query.requestid,
+                borrower: query.borrower,
+                amount: query.amount,
+                interestrate: query.interestrate,
+                time:query.time,
+                offeres: [],
+            }
+
+        }
+        else if(query.type === "LoanOffer"){
+            adata = {
+                offerid: query.offerid,
+                requestid: query.requestid,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                interestrate: query.interestrate,
+                time: query.time,
+            }
+        }
+        else if(query.type === "ActiveLoans"){
+            adata = {
+                loanid: query.loanid,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                payable: query.payable,
+                interestrate: query.interestrate,
+                daysemi: query.daysemi,
+                emi: query.emi,
+                penalty: query.penalty,
+                emileft: query.emileft,
             }
         }
         else{
-            return {
+            return res.status(200).send({
                 message: 'Invalid database type',
                 success: false,
-            };
+            });
         }
-        await db.collection(req.body.type).insertOne(adata);
+        // update the published status of the post
+        await db.collection(query.type).updateOne({"_id": Mongodb.ObjectID(query._id)},{$set: udata});
         await client.close();
         // return a message
         return {
-            message: 'Data added successfully',
+            message: 'Data updated successfully',
             success: true,
         };
-    } catch (error) {
+    } catch (err) {
+
         // return an error
         return {
-            message: new Error(error).message,
+            message: err.message,
             success: false,
         };
     }
