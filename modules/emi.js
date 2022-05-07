@@ -8,3 +8,4 @@ function EMI(interestRate, amount, time){
     return emi;
 }
 
+exports.emi = EMI;

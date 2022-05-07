@@ -1,7 +1,14 @@
 // global imports
-var app = require("express")();
-
+var express = require("express");
+var app = express();
+var bodyParser = require("body-parser");
 // configure server for logging.
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
+
+// accept all requests
 app.all("*", (req, res, func) => {
     const regex = /[/]api[/]/g;
     console.log(`Incoming request from ${req.ip} to ${req.url}`);
@@ -9,13 +16,18 @@ app.all("*", (req, res, func) => {
         try {
             console.log(`Loading .${req.url}`);
             var api = require(`.${req.url}`);
-            api.execute(req, res);
+            try {
+                api.execute(req, res);
+            }
+            catch(err){
+                console.log(`Error: ${err.message}`)
+            }
         }
         catch(err){
             console.log(`Failed to load .${req.url} ! \n error: ${err.message}`)
             res.status(200).json({
                 success: false,
-                message: "Invalid API Url ",
+                message: err.message,
             });
         }
     }
