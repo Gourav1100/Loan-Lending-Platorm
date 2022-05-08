@@ -1,22 +1,28 @@
 .button_bg {
     all: unset;
-    color: white;
+    color: #EDE6DB;
     background-color: #417D7A;
-    border-color: white;
+    border-color: #EDE6DB;
     border-radius: 5px;
     text-align: center;
-    border: 1px solid white;
+    border: .51px solid;
 }
 .button_bg:hover {
-    animation: btn_hover 2s;
+    animation: btn_hover 0.5s;
     background-color: #EDE6DB;
+    color: #417D7A;
+    border-color: #417D7A;
 }
 
 @keyframes btn_hover {
     from{
         background-color: #417D7A;
+        color: #EDE6DB;
+        border-color: #EDE6DB;
     }
     to{
         background-color: #EDE6DB;
+        color: #417D7A;
+        border-color: #417D7A;
     }
 }
