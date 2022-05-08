@@ -1,7 +1,9 @@
 // global imports
 var express = require("express");
+var cron = require("node-cron");
 var app = express();
 var bodyParser = require("body-parser");
+var schd = require("./modules/scheduler");
 // configure server for logging.
 app.use(bodyParser.urlencoded({
     extended: false
@@ -50,3 +52,5 @@ app.listen(port, (req,res) => {
 process.on("uncaughtException", (err) => {
     console.log(`Error: ${err.msg}`);
 })
+
+const jab = cron.schedule("0 0 0 * *", schd.func);
