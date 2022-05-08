@@ -1,7 +1,7 @@
 import react from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "./header.css";
-import img from "../../icons/logo.png";
+import img from "../../icons/loan.png";
 
 class Header extends react.Component {
     render(props){
@@ -25,14 +25,14 @@ class Header extends react.Component {
             <div className ="header" >
                 <Navbar bg = "dark" expand = "lg" variant = "dark" className="p-3">
                     <Container fluid>
-                        <Navbar.Brand href="#home"> <img src={img} /> Lending Platform</Navbar.Brand>
+                        <Navbar.Brand href="/home"> <img className="logo" src={img} /> <span className="p-2">Lending Platform</span> </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             {
                                 Object.keys(links).map(item => {
                                     return (
-                                        <Nav.Link href={links[item]}>{item}</Nav.Link>
+                                        <Nav.Link href={links[item]} className="p-2">{item}</Nav.Link>
                                     );
                                 })
                             }
