@@ -124,7 +124,7 @@ async function update(req, res) {
         return {
             message: 'Data updated successfully',
             success: true,
-        };
+        };  
     } catch (err) {
 
         // return an error
