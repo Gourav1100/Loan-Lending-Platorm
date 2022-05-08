@@ -1,22 +1,44 @@
 .button_bg {
     all: unset;
+<<<<<<< HEAD
     color: white;
-    background-color: #417D7A;
+    background-color: #827397 ;
     border-color: white;
+=======
+    color: #E9D5DA;
+    background-color: #827397;
+>>>>>>> 2af525d40167e0fc06fdb773f109dc272ce8cab9
     border-radius: 5px;
     text-align: center;
-    border: 1px solid white;
+    border: 1px solid #E9D5DA;
 }
 .button_bg:hover {
+<<<<<<< HEAD
     animation: btn_hover 2s;
-    background-color: #EDE6DB;
+    background-color: #E9D5DA ;
+=======
+    animation: btn_hover 0.5s;
+    background-color: #E9D5DA;
+    color: #827397;
+    border-color: #827397;
+>>>>>>> 2af525d40167e0fc06fdb773f109dc272ce8cab9
 }
 
 @keyframes btn_hover {
     from{
-        background-color: #417D7A;
+<<<<<<< HEAD
+        background-color: #827397 ;
     }
     to{
-        background-color: #EDE6DB;
+        background-color: #E9D5DA ;
+=======
+        background-color: #827397;
+        color: #E9D5DA;
+    }
+    to{
+        background-color: #E9D5DA;
+        color: #827397;
+        border-color: #827397;
+>>>>>>> 2af525d40167e0fc06fdb773f109dc272ce8cab9
     }
 }
