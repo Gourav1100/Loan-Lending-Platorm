@@ -1,5 +1,5 @@
 .vcon{
-  top: 50vh;
+  top: 40vh;
   bottom: 0;
   position: relative;
   transform: translateY(-50%);
@@ -7,29 +7,28 @@
 
 .img_size {
   width: 1.5em;
-  /* z-index: 100; */
+  height: auto;
   background-color: inherit;
   margin: 0.25em;
 }
 
 .h_break{
   color: white;
-  /* background-color: white; */
 }
 
 .center{
+<<<<<<< HEAD
     justify-content: center;
     align-items: center;
+=======
+>>>>>>> 2af525d40167e0fc06fdb773f109dc272ce8cab9
     text-align: center;
-    /* color:#E9D5DA; */
     font-weight: 100;
+<<<<<<< HEAD
     line-height: 1.25em;
     /* font-family:Verdana, Geneva, Tahoma, sans-serif; */
+=======
+>>>>>>> 2af525d40167e0fc06fdb773f109dc272ce8cab9
     padding-top:0.7em;
-    /* letter-spacing: 4em; */
-
 }
 
-.lg_font{
-  font-size: 20px;
-}
