@@ -18,7 +18,13 @@
 
 .center{
     text-align: center;
+<<<<<<< HEAD
     font-weight: 100;
+=======
+    /* color:#E9D5DA; */
+    font-weight: 100;
+    /* font-family:Verdana, Geneva, Tahoma, sans-serif; */
+>>>>>>> bfa75704967449cd839792fef9b850cea312ea55
     padding-top:0.7em;
 
 }

@@ -1,5 +1,4 @@
 function CIBIL_score(numTaken, returnedOnTime) {
-
     var score;
     //Math.floor(Math.random() * (max - min + 1)) + min
 

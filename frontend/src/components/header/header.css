@@ -1,5 +1,10 @@
 .header {
     position: relative;
+<<<<<<< HEAD
     font-size: 1.2em;
+=======
+    font-size: 1.5em;
+>>>>>>> bfa75704967449cd839792fef9b850cea312ea55
     z-index: 1;
+    /* margin-bottom: 2; */
 }
