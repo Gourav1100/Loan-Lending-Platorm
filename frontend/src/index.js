@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Market from './pages/market/market.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,9 +22,11 @@ root.render(
         <Routes>
           <Route path = "/" element={<App />}>
             <Route path = "/" element = {<Home />} />
+            <Route path = "/home" element = {<Home />} />
             <Route path = "/login" element = {<Login />} />
             <Route path = "/dashboard" element = {<Dashboard />} />
             <Route path = "/requests" element = {<Request />} />
+            <Route path = "/market" element = {<Market />} />
           </Route>
         </Routes>
       </BrowserRouter>
