@@ -34,10 +34,10 @@ async function EMIPenalty(req, res){
         d.setHours(0,0,0);
         await client.connect();
         const db = client.db("Flipr");
-        const val = db.collection("ActiveLoans").find({
+        var val = await db.collection("ActiveLoans").find({
             "DateOfEMI" : {$lt : d}
         }).toArray();
-        for(var i = 0; i < (await val).length; i++){
+        for(var i = 0; i < val.length; i++){
             val[i].Penalty += 1;
             await db.collection("ActiveLoans").updateOne({"_id": val[i]._id},{$set: val[i]});
         }
@@ -54,5 +54,5 @@ async function EMIPenalty(req, res){
         });
     }
 }
-exports.execute = Beyond20days;
-exports.execute = EMIPenalty;
+exports.Beyond20days = Beyond20days;
+exports.EMIPenalty = EMIPenalty;
