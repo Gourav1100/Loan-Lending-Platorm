@@ -15,7 +15,7 @@ class Home extends react.Component {
       <>
         <Header />
         {/* <br></br> */}
-        <Container className="bg-dark p-2 mt-2">
+        <Container className="bg-dark p-md-5 p-2 mt-2 ">
           <h1 className="center p-2">
             <img src={loan} alt="logo" className="img_size"></img> Lending
             Platform
@@ -62,9 +62,9 @@ class Home extends react.Component {
                   <button
                     variant="primary"
                     size="lg"
-                    className="button_bg p-2 mt-3 mb-2"
+                    className="button_bg p-2 mt-5 mb-2"
                   >
-                    Block level button
+                    Ask for Loan
                   </button>
                 </div>
               </Col>
@@ -73,9 +73,9 @@ class Home extends react.Component {
                   <button
                     variant="primary"
                     size="lg"
-                    className="button_bg p-2 mt-3 mb-2"
+                    className="button_bg p-2 mt-5 mb-2"
                   >
-                    Block level button
+                    Give a Loan
                   </button>
                 </div>
               </Col>
