@@ -4,10 +4,12 @@ var cron = require("node-cron");
 var app = express();
 var bodyParser = require("body-parser");
 var schd = require("./modules/scheduler");
+var cors = require("cors");
 // configure server for logging.
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(cors());
 app.use(bodyParser.json());
 
 // accept all requests
@@ -16,8 +18,13 @@ app.all("*", (req, res, func) => {
     console.log(`Incoming request from ${req.ip} to ${req.url}`);
     if( regex.test(req.url) ){
         try {
-            console.log(`Loading .${req.url}`);
-            var api = require(`.${req.url}`);
+            const url = req.url;
+            var path = "";
+            for( var i=0;i < url.length && url[i]!='?' ; i++ ){
+                path += url[i];
+            }
+            console.log(`Loading .${path}`);
+            var api = require(`.${path}`);
             try {
                 api.execute(req, res);
             }

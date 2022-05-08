@@ -1,19 +1,47 @@
-import react from "react";
-import "./market.css";
+// imports
 import Loancard from "../../components/card/card.js";
+import react from "react";
+import axios from "axios";
+import Header from "../../components/header/header.js";
+import Footer from "../../components/footer/footer.js";
+import { Container } from "react-bootstrap";
+// css
+import "./market.css";
 
 class Market extends react.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            data: [],
+            DataisLoaded: false,
+        };
+    }
+    componentDidMount(){
+        axios.get("http://localhost:5000/api/database?type=LoanOffer&method=GET").then((res) => {
+            this.setState({
+                data: res.data.message,
+                DataisLoaded: true,
+            })
+        });
+    }
     render(){
-        var res = fetch ("localhost:5000/api/database", {
-            method: "GET",
-            body: {
-                type: "LoanOffer",
-            }
-        }).json();
-        alert(res);
+        const {data, DataisLoaded} = this.state;
+        if(!DataisLoaded){
+            return (<>Data is being loaded... Please wait</>)
+        }
         return (
             <>
-                This is Market.
+                <Header />
+                <Container className="p-md-2 p-5 mt-2 mb-2">
+                    {
+                        data.map((item)=>{
+                            return (<>
+                                <Loancard borrower={item.borrower} ammount={item.ammount} interestrate={item.interestrate} time={item.time} date={item.date} />
+                            </>);
+                        })
+                    }
+                </Container>
+                <Footer />
             </>
         );
     }
