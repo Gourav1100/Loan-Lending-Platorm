@@ -1,43 +1,26 @@
 .button_bg {
     all: unset;
-<<<<<<< HEAD
     color: #E9D5DA;
     background-color: #827397;
-=======
-    color: white;
-    background-color: #827397;
-    border-color: white;
->>>>>>> bfa75704967449cd839792fef9b850cea312ea55
     border-radius: 5px;
     text-align: center;
     border: 1px solid #E9D5DA;
 }
 .button_bg:hover {
-<<<<<<< HEAD
     animation: btn_hover 0.5s;
     background-color: #E9D5DA;
     color: #827397;
     border-color: #827397;
-=======
-    animation: btn_hover 2s;
-    background-color: #E9D5DA;
->>>>>>> bfa75704967449cd839792fef9b850cea312ea55
 }
 
 @keyframes btn_hover {
     from{
         background-color: #827397;
-<<<<<<< HEAD
         color: #E9D5DA;
     }
     to{
         background-color: #E9D5DA;
         color: #827397;
         border-color: #827397;
-=======
-    }
-    to{
-        background-color: #E9D5DA;
->>>>>>> bfa75704967449cd839792fef9b850cea312ea55
     }
 }
