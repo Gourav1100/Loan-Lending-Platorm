@@ -10,7 +10,7 @@ class Market extends react.Component {
                 type: "LoanOffer",
             }
         }).json();
-        console.log(res);
+        alert(res);
         return (
             <>
                 This is Market.

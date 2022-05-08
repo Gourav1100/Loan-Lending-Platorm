@@ -9,7 +9,7 @@ class Loancard extends react.Component {
             <Card>
   <Card.Header as="h5"></Card.Header>
   <Card.Body>
-    <Card.Title>props.loanid</Card.Title>
+    <Card.Title>Special title treatment</Card.Title>
     <Card.Text>
       With supporting text below as a natural lead-in to additional content.
     </Card.Text>
