@@ -1,14 +1,8 @@
 import react from "react";
 import "./profile.css";
 import {
-  Tabs,
-  Tab,
-  Modal,
   Row,
-  Button,
   Col,
-  Form,
-  Card,
   Container,
 } from "react-bootstrap";
 import profile from "../../icons/profile.png";

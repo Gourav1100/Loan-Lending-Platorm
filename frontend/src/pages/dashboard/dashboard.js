@@ -3,7 +3,9 @@ import "./dashboard.css";
 import Dheader from "../../components/dheader/dheader.js"
 import Header from  "../../components/header/header.js"
 import Profile from "../../components/profile/profile.js"
-import {Tabs, Tab, Modal, Row, Button, Col, Form, Card, Container} from "react-bootstrap";
+import Footer from "../../components/footer/footer.js"
+import Request from "../../components/request/request.js"
+import {Tabs, Tab, Row, Col, Container} from "react-bootstrap";
 
 
 class Dashboard extends react.Component {
@@ -37,8 +39,7 @@ class Dashboard extends react.Component {
                                  />
                              </Tab>
                              <Tab eventKey="home" title="Requests">
-                                 {/* <Home /> */}
-                                 <Header />
+                                 <Request />
                              </Tab>
                              <Tab eventKey="contact" title="Contact" className="tabs">
                                  {/* <Contact /> */}
@@ -47,6 +48,7 @@ class Dashboard extends react.Component {
                      </Col>
                  </Row>
              </Container>
+            <Footer />
             </>
         );
     }
