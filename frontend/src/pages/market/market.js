@@ -36,7 +36,7 @@ class Market extends react.Component {
                     {
                         data.map((item)=>{
                             return (<>
-                                <Loancard borrower={item.borrower} ammount={item.ammount} interestrate={item.interestrate} time={item.time} date={item.date} />
+                                <Loancard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} />
                             </>);
                         })
                     }
