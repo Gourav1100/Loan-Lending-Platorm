@@ -3,7 +3,6 @@ import {InputGroup, FormControl, Card } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 class Loancard extends react.Component {
-<<<<<<< HEAD
   render(props) {
     return (
       <>
@@ -74,7 +73,6 @@ class Loancard extends react.Component {
       </>
     );
   }
-=======
     render(props){
 
         return (
@@ -92,7 +90,6 @@ class Loancard extends react.Component {
             </>
         );
     }
->>>>>>> ac163ca4f8950849f6aa86f3294cb8e4a7151dea
 }
 
 export default Loancard;

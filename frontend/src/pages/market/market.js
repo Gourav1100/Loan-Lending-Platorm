@@ -1,8 +1,5 @@
 // imports
 import Loancard from "../../components/card/card.js";
-<<<<<<< HEAD
-import { Container } from "react-bootstrap";
-=======
 import react from "react";
 import axios from "axios";
 import Header from "../../components/header/header.js";
@@ -10,7 +7,6 @@ import Footer from "../../components/footer/footer.js";
 import { Container } from "react-bootstrap";
 // css
 import "./market.css";
->>>>>>> ac163ca4f8950849f6aa86f3294cb8e4a7151dea
 
 class Market extends react.Component {
     constructor(props){
@@ -29,13 +25,10 @@ class Market extends react.Component {
         });
     }
     render(){
-<<<<<<< HEAD
-=======
         const {data, DataisLoaded} = this.state;
         if(!DataisLoaded){
             return (<>Data is being loaded... Please wait</>)
         }
->>>>>>> ac163ca4f8950849f6aa86f3294cb8e4a7151dea
         return (
             <>
                 <Header />
