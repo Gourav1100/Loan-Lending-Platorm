@@ -87,7 +87,6 @@ async function update(req, res) {
                 interestrate: query.interestrate,
                 time:query.time,
                 offeres: query.offers,
-                daysleft: query.daysleft,
             }
 
         }
@@ -110,7 +109,7 @@ async function update(req, res) {
                 amount: query.amount,
                 payable: query.payable,
                 interestrate: query.interestrate,
-                daysemi: query.daysemi,
+                dateofemi: query.dateofemi,
                 emi: query.emi,
                 penalty: query.penalty,
                 emileft: query.emileft,
