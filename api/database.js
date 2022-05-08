@@ -58,7 +58,7 @@ async function update(req, res) {
                 icode: query.icode,
                 ctc: query.ctc,
                 sslip: query.sslip,
-                notifications: [],
+                notifications: query.notifications,
                 noloans: query.noloans,
                 loansrepaid: query.loansrepaid,
             }
@@ -82,6 +82,7 @@ async function update(req, res) {
                 interestrate: query.interestrate,
                 time:query.time,
                 offeres: query.offers,
+                daysleft: query.daysleft,
             }
 
         }
@@ -186,8 +187,8 @@ async function add(req, res) {
                 branch: query.branch,
                 icode: query.icode,
                 ctc: query.ctc,
-                sslip: query.sslip,
-                notifications: [],
+                sslip: {},
+                notifications: {},
                 noloans: query.noloans,
                 loansrepaid: query.loansrepaid,
             }
@@ -211,6 +212,7 @@ async function add(req, res) {
                 interestrate: query.interestrate,
                 time:query.time,
                 offeres: [],
+                daysleft: 20,
             }
 
         }
@@ -246,7 +248,7 @@ async function add(req, res) {
             });
         }
         // update the published status of the post
-        await db.collection(query.type).updateOne({"_id": Mongodb.ObjectID(query._id)},{$set: udata});
+        await db.collection(query.type).updateOne({"_id": Mongodb.ObjectID(query._id)},{$set: adata});
         await client.close();
         // return a message
         return {
