@@ -6,7 +6,6 @@ import img from "../../icons/loan.png";
 class Header extends react.Component {
     render(props){
         var links = {};
-        console.log(window.sessionStorage.getItem("userid"));
         if ( window.sessionStorage.getItem("userid") === null || window.sessionStorage.getItem("userid") === "" ){
             links = {
                 "Home"      :   '/home',
