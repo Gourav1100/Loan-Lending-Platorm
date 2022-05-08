@@ -3,6 +3,7 @@ import {InputGroup, FormControl, Card } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 class Loancard extends react.Component {
+<<<<<<< HEAD
   render(props) {
     return (
       <>
@@ -73,6 +74,25 @@ class Loancard extends react.Component {
       </>
     );
   }
+=======
+    render(props){
+
+        return (
+            <>
+                <Card>
+                <Card.Header as="h5"></Card.Header>
+                <Card.Body>
+                    <Card.Title>Special title treatment</Card.Title>
+                    <Card.Text>
+                    With supporting text below as a natural lead-in to additional content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+                </Card>
+            </>
+        );
+    }
+>>>>>>> ac163ca4f8950849f6aa86f3294cb8e4a7151dea
 }
 
 export default Loancard;
