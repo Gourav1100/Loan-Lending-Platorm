@@ -4,7 +4,7 @@ import Loancard from "../../components/card/card.js";
 
 class Market extends react.Component {
     render(){
-        var res = await fetch ("localhost:5000/api/database", {
+        var res = fetch ("localhost:5000/api/database", {
             method: "GET",
             body: {
                 type: "LoanOffer",

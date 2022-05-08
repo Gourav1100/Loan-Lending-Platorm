@@ -1,5 +1,5 @@
 import react from "react";
-import { Container, Row, Col, Carousel, Buttonk, Card } from "react-bootstrap";
+import { Container, Row, Col, Carousel, Button, Card } from "react-bootstrap";
 
 class Loancard extends react.Component {
     render(props){
