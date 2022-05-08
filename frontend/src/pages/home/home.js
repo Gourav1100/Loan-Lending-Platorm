@@ -11,6 +11,7 @@ import slide3 from "../../slideshow/slide3.jpg";
 import loan from "../../icons/loan.png";
 class Home extends react.Component {
   render() {
+    
     return (
       <>
         <Header />
