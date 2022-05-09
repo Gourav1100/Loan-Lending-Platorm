@@ -17,7 +17,7 @@ class Market extends react.Component {
         };
     }
     componentDidMount(){
-        axios.get("http://localhost:5000/api/database?type=LoanOffer&method=GET").then((res) => {
+        axios.get("http://localhost:5000/api/database?type=LoanRequest&method=GET").then((res) => {
             this.setState({
                 data: res.data.message,
                 DataisLoaded: true,
