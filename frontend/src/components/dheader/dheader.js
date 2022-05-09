@@ -9,6 +9,9 @@ import notification from "../../icons/notification.png";
 
 
 class Dheader extends react.Component {
+    opennotification = ()=>{
+        document.getElementById("controlled-tab-tab-contact").click();
+    }
     render(props){
         if ( window.sessionStorage.getItem("userid") === null || window.sessionStorage.getItem("userid") === "" ){
             // window.location.replace("/");
@@ -23,8 +26,7 @@ class Dheader extends react.Component {
                         <Navbar.Collapse id="basic-navbar-nav">
                         </Navbar.Collapse>
                         <Nav className="dlinks">
-                            {/* <Nav.Link>Hey, {this.props.username} !</Nav.Link> */}
-                            <Nav.Link href="/dashboard"> <img src = {notification} className="img_size"></img></Nav.Link>
+                            <Nav.Link onClick={this.opennotification}  > <img src = {notification} className="img_size"></img></Nav.Link>
                             <Nav.Link href="/">Hey, {this.props.username} !<img src = {profile} className="img_size"></img></Nav.Link>
                         </Nav>
                        
