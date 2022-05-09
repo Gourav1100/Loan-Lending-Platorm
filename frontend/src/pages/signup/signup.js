@@ -17,6 +17,8 @@ class Signup extends react.Component {
   submit = (event) => {
     event.preventDefault();
     for(var i=0;i<event.target.length;i++){
+      console.log(event.target[i]);
+      console.log(event.target[i].name)
       if(event.target[i].name !=="sslips" && event.target[i].name !== "avatar" && (event.target[i].value==="" || event.target[i].value===null)){
         alert(`Please fill the required field : '${event.target[i].name}' .`);
         return false;
