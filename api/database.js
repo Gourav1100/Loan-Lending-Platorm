@@ -17,6 +17,12 @@ async function get(req,res){
         if(query.type === "Users"){
             rdata = await db.collection(query.type).findOne({"_id": Mongodb.ObjectID(query._id)}).toArray();
         }
+        else if (query.type == "MoneyLended"){
+            rdata = await db.collection("LoanHistory").find({"lender": Mongodb.ObjectID(query.userid)}).toArray();
+        }
+        else if (query.type == "MoneyBorrowed"){
+            rdata = await db.collection("LoanHistory").find({"borrower": Mongodb.ObjectID(query.userid)}).toArray();
+        }
         else {
             rdata = await db.collection(query.type).find().toArray();
         }
@@ -211,7 +217,7 @@ async function add(req, res) {
         }
         else if( query.type === "LoanHistory" ) {
             adata = {
-                loanid: query.loanid,
+                loanid: Mongodb.ObjectID(query.loanid),
                 borrower: query.borrower,
                 lender: query.lender,
                 amount: query.amount,

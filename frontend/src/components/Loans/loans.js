@@ -1,4 +1,6 @@
 import react from "react";
+import axios from "axios";
+
 import {
     Card,
     Table,
@@ -11,6 +13,46 @@ import RequestCard from "../request_card/request_card.js";
 
 
 class Loans extends react.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            data: [],
+            data1:[],
+            DataisLoaded: false,
+            Data1isLoaded: false,
+        };
+    }
+    componentDidMount(){
+        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+            type: "MoneyLended",
+            userid: window.sessionStorage.getItem("userid"), 
+            method: "GET",
+        }).then((res) => {
+
+        this.setState({
+                data: res.data.message,
+                DataisLoaded: true,
+            })
+        });
+
+        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+            type: "MoneyBorrowed",
+            userid: window.sessionStorage.getItem("userid"), 
+            method: "GET",
+        }).then((res) => {
+            this.setState({
+                data1: res.data1.message,
+                Data1isLoaded: true,
+            })
+        });
+        console.log(this.state.data);
+        console.log(this.state.data1);
+        
+    }
+
+    
+
     render(props){
         
         return(
