@@ -21,7 +21,6 @@ class RequestCard extends react.Component {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>Bidder</th>
                     <th>Amount</th>
                     <th>Interest Rate</th>
                     <th>Borrowing Period</th>
@@ -30,7 +29,6 @@ class RequestCard extends react.Component {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{this.props.lender}</td>
                     <td>{this.props.amount}</td>
                     <td>{this.props.interestrate}</td>
                     <td>{this.props.time}</td>

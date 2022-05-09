@@ -1,5 +1,6 @@
 import react from "react";
 import "./request.css";
+import axios from "axios";
 import {
     Row,
     Col,
@@ -11,12 +12,46 @@ import Newrequest from "../../components/newrequest/newrequest";
 
 
 class Request extends react.Component {
-    state = {
-        visible : false,
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            data: [],
+            DataisLoaded: false,
+            visible : false,
+        };
+    }
+    componentDidMount(){
+        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+            type: "LoanRequest",
+            method: "GET",
+            borrower: window.sessionStorage.getItem("userid")
+        }).then((res) => {
+
+        this.setState({
+                data: res.data.message,
+                DataisLoaded: true,
+            })
+        });
+    }
     
     render(props){
-        const check = this.state.visible ? <Newrequest /> : <RequestCard />;
+        if(!this.state.DataisLoaded){
+            return (<> <h3> Data is loading </h3> </>)
+        }
+        const check = this.state.visible ? <Newrequest /> : (
+            <>
+                {
+                    this.state.map((item)=>{
+                        return <RequestCard 
+                        amount = {item.amount}
+                        interestrate = {item.interestrate}
+                        date = {item.date}
+                        finaldate = {item.finaldate}
+                    />
+                    })
+                }
+            </>
+        );
         const bt_text = this.state.visible ? "See Previous Requests" : "Create new request";
         const show = this.state.visible ? null : "Your previous Requests";
         
