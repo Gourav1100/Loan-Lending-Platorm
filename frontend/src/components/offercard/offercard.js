@@ -1,8 +1,31 @@
 import react from "react";
 import { Card } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import axios from "axios";
 
 class OfferCard extends react.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+        data: [],
+        DataisLoaded: false,
+    };
+}
+
+    clicked = () =>{
+      axios.post("http://localhost:5000/api/payemi",{
+        method: "POST",
+        _id :  "6279888a98beec463ca61ee8", //(window.sessionStorage.getItem("_id")),
+    }).then((res) => {
+
+    this.setState({
+            data: res.data.message,
+            DataisLoaded: true,
+        })
+    });
+    alert("Your emi is paid");
+    }
   render(props) { 
       let content;  
       if(this.props.needbutton){
@@ -12,7 +35,7 @@ class OfferCard extends react.Component {
           </div>;
       }else{
           content = <div className="">
-          <button className="button_bg p-2 m-3"><h5>Pay EMI</h5></button>
+          <button className="button_bg p-2 m-3" onClick={this.clicked}><h5>Pay EMI</h5></button>
           </div>;
       }
     return (

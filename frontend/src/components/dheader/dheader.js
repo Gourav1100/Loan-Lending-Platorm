@@ -18,22 +18,19 @@ class Dheader extends react.Component {
 
     return (
       <div className="header">
-        <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+        <Navbar bg="dark" expand="sm" variant="dark" className="p-3">
           <Container fluid>
             <Navbar.Brand className="rt" href="/home">
               {" "}
               <img className="logo " src={img} />{" "}
               <span className="p-2 ">Lending Platform</span>{" "}
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
             <Nav className="dlinks">
               <Nav.Link onClick={this.opennotification}>
-                {" "}
                 <img src={notification} className="img_size"></img>
               </Nav.Link>
-              <Nav.Link href="/">
-                Hey, {this.props.username} !
+              <Nav.Link href="/dashboard">
+                Hey, <b>{this.props.username}</b> !
                 <img src={profile} className="img_size"></img>
               </Nav.Link>
             </Nav>
