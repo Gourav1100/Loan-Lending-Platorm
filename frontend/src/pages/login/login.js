@@ -11,6 +11,7 @@ import google from "../../icons/google.png";
 // css
 import "../../common.css";
 import "./login.css";
+import Footer from "../../components/footer/footer";
 
 // Google Client ID
 const GOOGLE_CLIENT_ID = "925813570837-d0fdjbfugemslhaq2hr1frf15rk8vl02.apps.googleusercontent.com"
@@ -88,7 +89,6 @@ class Login extends react.Component {
           </Row>
 
         </Container>
-
       </>
     );
   }

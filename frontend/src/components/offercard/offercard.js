@@ -1,21 +1,27 @@
 import react from "react";
-import { Container, Row, Col, Carousel, Button, Card } from "react-bootstrap";
-import "./request_card.css";
-import tick from "../../icons/tick.png";
-import cross from "../../icons/remove.png";
+import { Card } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
-class RequestCard extends react.Component {
-  render(props) {
-    var success = window.sessionStorage.getItem("finalstatus");
+class OfferCard extends react.Component {
+  render(props) { 
+      let content;  
+      if(this.props.needbutton){
+          content = <div className="center">
+          <button className="button_bg p-2 m-3"><h5>Accept</h5></button>
+          <button className="button_bg p-2 m-3"><h5>Reject</h5></button>
+          </div>;
+      }else{
+          content = <div className="">
+          <button className="button_bg p-2 m-3"><h5>Pay EMI</h5></button>
+          </div>;
+      }
     return (
       <>
         <Card className="blue">
           <Card.Header as="h5"></Card.Header>
           <Card.Body>
             <Card.Title>
-              {this.props.requestid}
-              <img src={success ? tick : cross} className="img_size" />
+              {this.props.offerid}
             </Card.Title>
             <Card.Text>
               <Table striped bordered hover>
@@ -38,6 +44,7 @@ class RequestCard extends react.Component {
                   </tr>
                 </tbody>
               </Table>
+              {content}
             </Card.Text>
           </Card.Body>
         </Card>
@@ -47,4 +54,4 @@ class RequestCard extends react.Component {
   }
 }
 
-export default RequestCard;
+export default OfferCard;

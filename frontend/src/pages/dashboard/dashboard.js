@@ -7,6 +7,8 @@ import Footer from "../../components/footer/footer.js";
 import Request from "../../components/request/request.js";
 import { Tabs, Tab, Row, Col, Container } from "react-bootstrap";
 import Notifications from "../../components/notifications/notifications";
+import Offer from "../../components/offers/offers";
+import Loans from "../../components/Loans/loans";
 
 class Dashboard extends react.Component {
   render() {
@@ -43,9 +45,17 @@ class Dashboard extends react.Component {
                 <Tab eventKey="home" title="Requests">
                   <Request />
                 </Tab>
-                <Tab eventKey="contact" title="Notifications" className="tabs">
+                <Tab eventKey="offers" title="Offers">
+                  <Offer />
+                </Tab>
+                <Tab eventKey="loans" title="Loans">
+                  <Loans />
+                </Tab>
+                <Tab eventKey="notifications" title="Notifications" className="tabs">
                   <Notifications />
                 </Tab>
+                
+                
               </Tabs>
             </Col>
           </Row>
