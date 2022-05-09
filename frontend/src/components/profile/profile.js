@@ -4,6 +4,9 @@ import {
   Row,
   Col,
   Container,
+  InputGroup,
+  FormControl,
+  Stack
 } from "react-bootstrap";
 import profile from "../../icons/profile.png";
 
@@ -17,7 +20,7 @@ class Profile extends react.Component {
       <Container>
         <Row>
           <Col md={{ span: 5 }} className="center mt-5 p-5">
-            <img src={profile} className="fit center"></img>
+            <img src= {this.props.image? this.props.image : profile} className="fit center"></img>
           </Col>
           <Col className=" p-2 mt-2">
             <h1 className="center">Personal Details</h1>
@@ -140,6 +143,30 @@ class Profile extends react.Component {
               {this.tab}
               {this.props.offeredloans}
             </h3>
+            <br></br>
+            <hr className = "h_break"></hr>
+            <h1 className="center">Update Salary Slips</h1>
+            <br></br>
+            <form className="center">
+            <InputGroup className="mb-3 ">
+                    <InputGroup.Text id="basic-addon1">Salary Slip </InputGroup.Text>
+                    <FormControl
+                      type="file"
+                      name="sslips"
+                      onChange={this.loadimages}
+                      aria-label="sslips"
+                      aria-describedby="basic-addon1"
+                      multiple
+                    />
+                    <button
+                    className="button_bg p-2"
+                    type="submit">
+                    Submit
+                  </button>
+                  </InputGroup>
+           
+            
+                  </form>
           </Col>
         </Row>
       </Container>

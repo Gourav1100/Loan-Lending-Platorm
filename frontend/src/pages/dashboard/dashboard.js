@@ -7,12 +7,14 @@ import Footer from "../../components/footer/footer.js";
 import Request from "../../components/request/request.js";
 import { Tabs, Tab, Row, Col, Container } from "react-bootstrap";
 import Notifications from "../../components/notifications/notifications";
+import Offer from "../../components/offers/offers";
+import Loans from "../../components/Loans/loans";
 
 class Dashboard extends react.Component {
   render() {
     return (
       <>
-        <Dheader username="Ashutosh" />
+        <Dheader username = {window.sessionStorage.getItem("username")? window.sessionStorage.getItem("username") : "User"} />
         <Container className="bg-dark flex-column mt-2 p-2">
           <Row>
             <Col>
@@ -36,18 +38,24 @@ class Dashboard extends react.Component {
                     ifsc={window.sessionStorage.getItem("ifsc")}
                     ctc={window.sessionStorage.getItem("ctc")}
                     activeloans={window.sessionStorage.getItem("activeloans")}
-                    completedloans={window.sessionStorage.getItem(
-                      "completedloans"
-                    )}
+                    completedloans={window.sessionStorage.getItem("completedloans")}
                     offeredloans={window.sessionStorage.getItem("offeredloans")}
                   />
                 </Tab>
                 <Tab eventKey="home" title="Requests">
                   <Request />
                 </Tab>
-                <Tab eventKey="contact" title="Notifications" className="tabs"> 
-                <Notifications/>
+                <Tab eventKey="offers" title="Offers">
+                  <Offer />
                 </Tab>
+                <Tab eventKey="loans" title="Loans">
+                  <Loans />
+                </Tab>
+                <Tab eventKey="notifications" title="Notifications" className="tabs">
+                  <Notifications />
+                </Tab>
+                
+                
               </Tabs>
             </Col>
           </Row>

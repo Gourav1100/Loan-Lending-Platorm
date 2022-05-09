@@ -10,6 +10,7 @@ import padlock from "../../icons/padlock.png";
 // css
 import "../../common.css";
 import "./login.css";
+import Footer from "../../components/footer/footer";
 
 class Login extends react.Component {
   submit = (event) => {
@@ -84,7 +85,6 @@ class Login extends react.Component {
           </Row>
 
         </Container>
-
       </>
     );
   }
