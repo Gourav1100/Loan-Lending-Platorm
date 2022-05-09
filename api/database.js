@@ -203,8 +203,8 @@ async function add(req, res) {
                 branch: query.branch,
                 icode: query.icode,
                 ctc: query.ctc,
-                sslip: {},
-                notifications: {},
+                sslip: query.sslip,
+                notifications: [],
                 noloans: query.noloans,
                 loansrepaid: query.loansrepaid,
             }
@@ -279,7 +279,7 @@ async function add(req, res) {
             });
         }
         // update the published status of the post
-        await db.collection(query.type).updateOne({"_id": Mongodb.ObjectID(query._id)},{$set: adata});
+        await db.collection(query.type).insertOne(adata);
         await client.close();
         // return a message
         return {

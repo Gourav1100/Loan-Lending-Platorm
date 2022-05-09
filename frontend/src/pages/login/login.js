@@ -33,7 +33,6 @@ class Login extends react.Component {
   }
 
   render() {
-    console.log(GOOGLE_CLIENT_ID);
     return (
       <>
         <Header />
