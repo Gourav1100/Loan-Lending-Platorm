@@ -10,7 +10,6 @@ import padlock from "../../icons/padlock.png";
 // css
 import "../../common.css";
 import "./login.css";
-import Footer from "../../components/footer/footer";
 
 class Login extends react.Component {
   submit = (event) => {
@@ -25,10 +24,24 @@ class Login extends react.Component {
       email: event.target.email.value,
       password: event.target.password.value,
     }).then((res)=>{
-      console.log(res.data);
       if(res.data.success===true){
         window.sessionStorage.setItem("userid",res.data.message._id);
+        window.sessionStorage.setItem("name",res.data.message.name);
+        window.sessionStorage.setItem("username",res.data.message.username);
+        window.sessionStorage.setItem("phone",res.data.message.phone);
+        window.sessionStorage.setItem("email",res.data.message.email);
+        window.sessionStorage.setItem("address",res.data.message.address);
+        window.sessionStorage.setItem("completedloans",res.data.message.loansrepaid);
+        window.sessionStorage.setItem("country",res.data.message.country);
+        window.sessionStorage.setItem("aadhar",res.data.message.aadharnum);
+        window.sessionStorage.setItem("pan",res.data.message.pannum);
+        window.sessionStorage.setItem("bank",res.data.message.bankname);
+        window.sessionStorage.setItem("branch",res.data.message.branch);
+        window.sessionStorage.setItem("ifsc",res.data.message.icode);
+        window.sessionStorage.setItem("ctc",res.data.message.ctc);
+        window.sessionStorage.setItem("activeloans",res.data.message.noloans);
         window.location.replace("/dashboard");
+        return true;
       }
       alert(`Error: ${res.data.message}`)
       return false;
@@ -83,7 +96,6 @@ class Login extends react.Component {
 
             <Col xs={{ span: 1 }} md={{ span: 2 }} lg={{span: 3}} xl={{span: 4}}/>
           </Row>
-
         </Container>
       </>
     );
