@@ -30,7 +30,7 @@ class Offer extends react.Component {
             })
         });
     }
-    render(){
+    render(props){
         const {data, DataisLoaded} = this.state;
         if(!DataisLoaded){
             return (<>Data is being loaded... Please wait</>)
