@@ -29,6 +29,7 @@ class Market extends react.Component {
         if(!DataisLoaded){
             return (<>Data is being loaded... Please wait</>)
         }
+        console.log(data);
         return (
             <>
                 <Header />

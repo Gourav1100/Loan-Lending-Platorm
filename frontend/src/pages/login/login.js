@@ -1,28 +1,35 @@
 // components
 import react from "react";
-import "./login.css";
 import { Container, Row, Col, Stack, InputGroup, FormControl } from "react-bootstrap";
 import Header from "../../components/header/header";
 import { GoogleLogin } from "react-google-login";
+import axios from "axios";
 // icons
 import userimg from "../../icons/user.png";
 import padlock from "../../icons/padlock.png";
 import google from "../../icons/google.png";
 // css
 import "../../common.css";
+import "./login.css";
 
-// ClientId
-const GOOGLE_CLIENT_ID = "925813570837-d0fdjbfugemslhaq2hr1frf15rk8vl02.apps.googleusercontent.com";
+// Google Client ID
+const GOOGLE_CLIENT_ID = "925813570837-d0fdjbfugemslhaq2hr1frf15rk8vl02.apps.googleusercontent.com"
 
 class Login extends react.Component {
   submit = (event) => {
     event.preventDefault();
   }
-  onSuccess = (res) => {
-    console.log(`[ Login Success ] Current User: ${res.profileObj}`)
-  };
-  onFailure = (res) => {
-    console.log("[ login Failed ] res: ", res);
+  handleLogin = (googleData) => {
+    const res = axios("http://localhost:5000/api/OAuth", {
+      method: "POST",
+      body: JSON.stringify({
+        token: googleData.tokenId
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then( res => res.json() );
+    console.log(res);
   }
 
   render() {
@@ -62,8 +69,8 @@ class Login extends react.Component {
 
                   <GoogleLogin
                       clientId={GOOGLE_CLIENT_ID}
-                      onSuccess={this.onSuccess}
-                      onFailure={this.onFailure}
+                      onSuccess={this.handleLogin}
+                      onFailure={this.handleLogin}
                       buttonText="Log in with Google"
                       cookiePolicy={'single_host_origin'}
                       className="botton_bg p-1"
