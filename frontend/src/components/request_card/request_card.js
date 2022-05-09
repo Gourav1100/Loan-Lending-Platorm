@@ -11,7 +11,7 @@ class RequestCard extends react.Component {
     return (
       <>
         <Card className="blue">
-          <Card.Header as="h5"></Card.Header>3
+          <Card.Header as="h5"></Card.Header>
           <Card.Body>
             <Card.Title>
               {this.props.requestid}
