@@ -17,7 +17,7 @@ class Signup extends react.Component {
   submit = (event) => {
     event.preventDefault();
     for(var i=0;i<event.target.length;i++){
-      if(event.target[i].name !=="sslips" && event.target[i].name !== "avatar" && event.target[i].value==="" || event.target[i].value===null){
+      if(event.target[i].name !=="sslips" && event.target[i].name !== "avatar" && (event.target[i].value==="" || event.target[i].value===null)){
         alert(`Please fill the required field : '${event.target[i].name}' .`);
         return false;
       }
@@ -26,7 +26,6 @@ class Signup extends react.Component {
       alert(`Atleast one salary slip is required.`)
       return false;
     }
-    console.log(event.target.name);
     axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
       username: event.target.username,
       name: event.target.name,
@@ -46,8 +45,6 @@ class Signup extends react.Component {
       icode: event.target.icode,
       ctc: event.target.ctc,
       sslip: this.sslips,
-      noloans: event.target.noloans,
-      loansrepaid: event.target.loansrepaid,
     }).then((res)=>{
       res=res.json();
       if(res.success === true){
@@ -91,7 +88,6 @@ class Signup extends react.Component {
   render() {
     return (
     <>
-        <img id="testimg" src="" alt="image"></img>
         <Header />
         <Container>
           <Row className="p-2 mt-2 mb-2">
