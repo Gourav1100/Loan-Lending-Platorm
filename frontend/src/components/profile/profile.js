@@ -17,7 +17,7 @@ class Profile extends react.Component {
       <Container>
         <Row>
           <Col md={{ span: 5 }} className="center mt-5 p-5">
-            <img src={profile} className="fit center"></img>
+            <img src= {this.props.image? this.props.image : profile} className="fit center"></img>
           </Col>
           <Col className=" p-2 mt-2">
             <h1 className="center">Personal Details</h1>

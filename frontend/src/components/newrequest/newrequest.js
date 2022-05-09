@@ -32,28 +32,26 @@ class Newrequest extends react.Component {
                   <InputGroup className="mb-3 ">
                     <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                     <FormControl
-                    placeholder = "Amount"
-                    aria-label="Amount"
+                      placeholder="Amount"
+                      aria-label="Amount"
                       aria-describedby="basic-addon1"
                       type="number"
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1">
-                    </InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                     <FormControl
-                    placeholder = "Interest rate"
-                    aria-label="Interest Rate"
+                      placeholder="Interest rate"
+                      aria-label="Interest Rate"
                       aria-describedby="basic-addon1"
                       type="number"
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1">
-                    </InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                     <FormControl
-                    placeholder = "Borrowing Period"
-                    aria-label="Borrowing Period"
+                      placeholder="Borrowing Period"
+                      aria-label="Borrowing Period"
                       aria-describedby="basic-addon1"
                       type="number"
                     />

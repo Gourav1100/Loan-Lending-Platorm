@@ -1,5 +1,5 @@
 import react from "react";
-import {InputGroup, FormControl, Card, Button } from "react-bootstrap";
+import { InputGroup, FormControl, Card, Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 class NotificationCard extends react.Component {
@@ -9,9 +9,7 @@ class NotificationCard extends react.Component {
         <Card className="blue">
           <Card.Header as="h5"></Card.Header>
           <Card.Body>
-            <Card.Text>
-              {this.props.notificationtext}
-            </Card.Text>
+            <Card.Text>{this.props.notificationtext}</Card.Text>
           </Card.Body>
         </Card>
         <hr className="h_break"></hr>
