@@ -71,6 +71,9 @@ class Login extends react.Component {
                     />
 
                   <hr className="h_break" />
+                  <div style={{"font-size": "1.2em"}}>
+                  Didn't have an account ? <a style = {{'font-size': "1.2em"}} href="/signup">SignUp</a>
+                  </div>
                 </Stack>
               </form>
             </Col>

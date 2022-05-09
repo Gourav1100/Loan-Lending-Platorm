@@ -10,9 +10,25 @@ async function Beyond20days(req, res){
         d.setDate(d.getDate() - 20);
         await client.connect();
         const db = client.db("Flipr");
+        var trans = await db.collection("LoanRequest").find({"Date" : {$lt : d}}).toArray();
         await db.collection("LoanRequest").deleteMany({
             "Date" : {$lt : d}
         });
+        let somdata = {}; let somarray = [];
+        for (var i = 0; i < trans.length; i++){
+            somdata = {
+                requestid: trans[i]._id,
+                accepted: false,
+                borrower: trans[i].borrower,
+                lender: null,
+                amount: trans[i].amount,
+                interestrate: trans[i].interestrate,
+                time: trans[i].time,
+                finaldate: new Date(),
+            }
+            somarray.push(somdata);
+        }
+        await db.collection("RequestHistory").insertMany(somarray);
         return res.status(200).json({
             success: true,
             message: "success",
