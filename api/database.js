@@ -23,6 +23,11 @@ async function get(req,res){
         else if (query.type == "MoneyBorrowed"){
             rdata = await db.collection("LoanHistory").find({"borrower": Mongodb.ObjectID(query.userid)}).toArray();
         }
+        else if (query.type == "GetUsername"){
+            rdata = await db.collection("Users").find({"_id": Mongodb.ObjectID(query.userid)}).toArray();
+            rdata = rdata[0].username;
+            return rdata;
+        }
         else {
             rdata = await db.collection(query.type).find().toArray();
         }
