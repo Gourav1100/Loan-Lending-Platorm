@@ -17,10 +17,10 @@ class Footer extends react.Component {
             <div>
                 <Container fluid className="bg-dark mt-2" style={{"color": "white",}}>
                     <Row className="p-5">
-                        <Col md={{span: 6}} style={{"font-size": "3em"}}>
+                        <Col md={{span: 6}} style={{"font-size": "3em"}} className="p-2 center_align">
                             <img className="logo_big" src={logo} /> Lending Platform
                         </Col>
-                        <Col md={{span: 6}} style={{"font-size": "1.2em"}}>
+                        <Col md={{span: 6}} style={{"font-size": "1.2em"}} className="p-2">
                             <Container fluid ClassName="logoContainer">
                                 <Row>
                                     <Col>
@@ -48,19 +48,19 @@ class Footer extends react.Component {
                             {/* empty to set icons in center */}
                         </Col>
                         <Col md={{span: 2
-                        }} style={{"font-size": "3em"}}>
+                        }} style={{"font-size": "3em"}} className="p-2 center_align">
                             <img className="logo_medium" src={gmail} />
                         </Col>
-                        <Col md={{span: 2}} style={{"font-size": "3em"}}>
+                        <Col md={{span: 2}} style={{"font-size": "3em"}} className="p-2 center_align">
                             <img className="logo_medium" src={github} />
                         </Col>
-                        <Col md={{span: 2}} style={{"font-size": "3em"}}>
+                        <Col md={{span: 2}} style={{"font-size": "3em"}} className="p-2 center_align">
                             <img className="logo_medium" src={twitter} />
                         </Col>
-                        <Col md={{span: 2}} style={{"font-size": "3em"}}>
+                        <Col md={{span: 2}} style={{"font-size": "3em"}} className="p-2 center_align">
                             <img className="logo_medium" src={facebook} />
                         </Col>
-                        <Col md={{span: 2}} style={{"font-size": "3em"}}>
+                        <Col md={{span: 2}} style={{"font-size": "3em"}} className="p-2 center_align">
                             <img className="logo_medium" src={instagram} />
                         </Col>
                         <Col md={{span: 1}} style={{"font-size": "3em"}}>
