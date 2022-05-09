@@ -5,6 +5,10 @@ var app = express();
 var bodyParser = require("body-parser");
 var schd = require("./modules/scheduler");
 var cors = require("cors");
+var dotenv = require("dotenv");
+
+// load env variables
+dotenv.config();
 // configure server for logging.
 app.use(bodyParser.urlencoded({
     extended: false
@@ -13,7 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // accept all requests
-app.all("*", (req, res, func) => {
+app.all("*", async (req, res, func) => {
     const regex = /[/]api[/]/g;
     console.log(`Incoming request from ${req.ip} to ${req.url}`);
     if( regex.test(req.url) ){
@@ -26,7 +30,7 @@ app.all("*", (req, res, func) => {
             console.log(`Loading .${path}`);
             var api = require(`.${path}`);
             try {
-                api.execute(req, res);
+                await api.execute(req, res);
             }
             catch(err){
                 console.log(`Error: ${err.message}`)

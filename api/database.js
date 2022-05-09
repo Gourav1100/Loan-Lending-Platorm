@@ -9,7 +9,7 @@ var Cibil = require("../modules/cibil.js")
 async function get(req,res){
     try {
         // fetch request data
-        let query = url.parse(req.url,true).query;
+        let query = req.body
         let rdata = [];
         // fetch the posts
         await client.connect();
@@ -41,7 +41,7 @@ async function update(req, res) {
         await client.connect();
         let db = client.db("Flipr");
         // get body data
-        let query = url.parse(req.url,true).query;
+        let query = req.body
         // set update data
         let udata = {};
         if(query.type === "Users"){
@@ -140,7 +140,7 @@ async function update(req, res) {
         return {
             message: 'Data updated successfully',
             success: true,
-        };  
+        };
     } catch (err) {
 
         // return an error
@@ -158,8 +158,8 @@ async function Delete(req, res) {
         let db = client.db("Flipr");
 
         // Deleting the post
-        await db.collection(url.parse(req.url,true).query.type).deleteOne({
-            "_id": Mongodb.ObjectID(url.parse(req.url,true).query._id),
+        await db.collection(req.body.type).deleteOne({
+            "_id": Mongodb.ObjectID(req.body._id),
         });
         await client.close();
         // returning a message
@@ -182,7 +182,7 @@ async function add(req, res) {
         await client.connect();
         const db = client.db("Flipr");
         // set user query
-        let query = url.parse(req.url,true).query;
+        let query = req.body
         //  set add data
         let adata = {};
         if(query.type === "Users"){
@@ -203,8 +203,8 @@ async function add(req, res) {
                 branch: query.branch,
                 icode: query.icode,
                 ctc: query.ctc,
-                sslip: {},
-                notifications: {},
+                sslip: query.sslip,
+                notifications: [],
                 noloans: query.noloans,
                 loansrepaid: query.loansrepaid,
             }
@@ -279,7 +279,7 @@ async function add(req, res) {
             });
         }
         // update the published status of the post
-        await db.collection(query.type).updateOne({"_id": Mongodb.ObjectID(query._id)},{$set: adata});
+        await db.collection(query.type).insertOne(adata);
         await client.close();
         // return a message
         return {
@@ -303,8 +303,7 @@ async function handler(req, res){
         success: false,
         message: "Invalid Request Type ! ",
     };
-    const query = url.parse(req.url,true).query;
-    switch(query.method){
+    switch(req.body.method){
         case "GET"      :
             response = await get(req, res);
             break;
