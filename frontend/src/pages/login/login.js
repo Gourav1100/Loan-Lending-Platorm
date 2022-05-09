@@ -2,37 +2,42 @@
 import react from "react";
 import { Container, Row, Col, Stack, InputGroup, FormControl } from "react-bootstrap";
 import Header from "../../components/header/header";
-import { GoogleLogin } from "react-google-login";
 import axios from "axios";
+import Footer from "../../components/footer/footer";
 // icons
 import userimg from "../../icons/user.png";
 import padlock from "../../icons/padlock.png";
-import google from "../../icons/google.png";
 // css
 import "../../common.css";
 import "./login.css";
 
-// Google Client ID
-const GOOGLE_CLIENT_ID = "925813570837-d0fdjbfugemslhaq2hr1frf15rk8vl02.apps.googleusercontent.com"
-
 class Login extends react.Component {
   submit = (event) => {
     event.preventDefault();
-  }
-  handleLogin = (googleData) => {
-    const res = axios("http://localhost:5000/api/OAuth", {
-      method: "POST",
-      body: JSON.stringify({
-        token: googleData.tokenId
-      }),
-      headers: {
-        "Content-Type": "application/json"
+    if(event.target.email.value === null || event.target.email.value === "" || event.target.password.value === "" || event.target.password.value === null){
+      alert("Plase Fill all the Fields.");
+      return false;
+    }
+    axios.post("http://localhost:5000/api/database",{
+      type: "Login",
+      method: "GET",
+      email: event.target.email.value,
+      password: event.target.password.value,
+    }).then((res)=>{
+      console.log(res.data);
+      if(res.data.success===true){
+        window.sessionStorage.setItem("userid",res.data.message._id);
+        window.location.replace("/dashboard");
       }
-    }).then( res => res.json() );
-    console.log(res);
+      alert(`Error: ${res.data.message}`)
+      return false;
+    })
   }
 
   render() {
+    if(window.sessionStorage.getItem("userid")){
+      window.location.replace("/dashboard");
+    }
     return (
       <>
         <Header />
@@ -46,16 +51,19 @@ class Login extends react.Component {
                   <InputGroup className="mb-3 ">
                     <InputGroup.Text id="basic-addon1"><img className="img_size" src={userimg}></img></InputGroup.Text>
                     <FormControl
-                      placeholder="Username"
-                      aria-label="Username"
+                      placeholder="Email"
+                      aria-label="email"
+                      name="email"
                       aria-describedby="basic-addon1"
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">
                     <InputGroup.Text id="basic-addon1"><img className="img_size" src={padlock}></img></InputGroup.Text>
                     <FormControl
+                      type="password"
                       placeholder="Password"
-                      aria-label="Password"
+                      aria-label="password"
+                      name="password"
                       aria-describedby="basic-addon1"
                     />
                   </InputGroup>
@@ -65,20 +73,8 @@ class Login extends react.Component {
                     Login
                   </button>
                   <hr className="h_break" />
-
-                  <GoogleLogin
-                      clientId={GOOGLE_CLIENT_ID}
-                      onSuccess={this.handleLogin}
-                      onFailure={this.handleLogin}
-                      buttonText="Log in with Google"
-                      cookiePolicy={'single_host_origin'}
-                      className="botton_bg p-1"
-                      isSignedIn={true}
-                    />
-
-                  <hr className="h_break" />
                   <div style={{"font-size": "1.2em"}}>
-                  Didn't have an account ? <a style = {{'font-size': "1.2em"}} href="/signup">SignUp</a>
+                  Didn't have an account ? <a id="signup" href="/signup">SignUp</a>
                   </div>
                 </Stack>
               </form>

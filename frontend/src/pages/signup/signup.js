@@ -12,82 +12,48 @@ import "../../common.css";
 import Footer from "../../components/footer/footer";
 
 class Signup extends react.Component {
-  avatar = null;
-  sslip = null;
   submit = (event) => {
     event.preventDefault();
     for(var i=0;i<event.target.length;i++){
-      console.log(event.target[i]);
-      console.log(event.target[i].name)
-      if(event.target[i].name !=="sslips" && event.target[i].name !== "avatar" && (event.target[i].value==="" || event.target[i].value===null)){
+      if(event.target[i].value==="" || event.target[i].value===null){
         alert(`Please fill the required field : '${event.target[i].name}' .`);
         return false;
       }
     }
-    if(this.sslips === null || this.sslips === "" ){
-      alert(`Atleast one salary slip is required.`)
-      return false;
-    }
     axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
-      username: event.target.username,
-      name: event.target.name,
-      password: event.target.password,
-      phone: event.target.phone,
-      email: event.target.email,
-      address: event.target.address,
-      aadharnum: event.target.aadharnum,
-      pannum: event.target.pannum,
-      photo: this.avatar,
+      method: "POST",
+      type: "Users",
+      username: event.target.username.value,
+      name: event.target.name.value,
+      password: event.target.password.value,
+      phone: event.target.phone.value,
+      email: event.target.email.value,
+      address: event.target.address.value,
+      aadharnum: event.target.aadharnum.value,
+      pannum: event.target.pannum.value,
       noloans: 0,
       loansrepaid: 0,
-      country: event.target.country,
-      bankname: event.target.bankname,
-      accountno: event.target.accountno,
-      branch: event.target.branch,
-      icode: event.target.icode,
-      ctc: event.target.ctc,
-      sslip: this.sslips,
+      country: event.target.country.value,
+      bankname: event.target.bankname.value,
+      accountno: event.target.accountno.value,
+      branch: event.target.branch.value,
+      icode: event.target.icode.value,
+      ctc: event.target.ctc.value,
     }).then((res)=>{
-      res=res.json();
-      if(res.success === true){
-        window.location.href("/dashboard");
+      console.log(res);
+      if(res.data.success === true){
+        alert("User added successfully !");
+        window.location.replace("/login");
         return true;
       }
       alert(`Error occured, error message: ${res}`);
       return false;
-    })
+    });
   }
-  loadimages = (event) =>{
-    if(event.target.files.length>15){
-      alert(`Max number of files : 15 , got ${event.target.files.length} !`)
-      event.target.value = null;
-      event.target.files = null;
-      return false;
-    }
-    for(var i=0;i<event.target.files.length;i++){
-      if(!event.target.files.item(i).type.startsWith("image/")){
-        alert(`File : ${event.target.files[i].name} is not an accepted image format.`)
-        event.target.files = null;
-        event.target.value = null;
-        if(event.target.name==="sslips"){
-          this.sslips=[];
-        }
-        else if(event.target.name==="avatar"){
-          this.avatar="";
-        }
-        return false;
-      }
-    }
-    console.log(event.target.name==="sslips")
-    if(event.target.name==="avatar"){
-      this.avatar = event.target.files[0];
-    }
-    else if(event.target.name==="sslips"){
-      this.sslips = event.target.files;
-    }
-  }
-
   render() {
+    if(window.sessionStorage.getItem("userid")){
+      window.location.replace("/dashboard");
+    }
     return (
     <>
         <Header />
@@ -113,6 +79,7 @@ class Signup extends react.Component {
                   <InputGroup className="mb-3 ">
                     <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={padlock}></img></InputGroup.Text>
                     <FormControl
+                      type="password"
                       placeholder="Password"
                       name = "password"
                       aria-label="password"
@@ -174,8 +141,8 @@ class Signup extends react.Component {
                     <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Aadhaar Number"
-                      aria-label="aadhaarnum"
-                      name="aadhaarnum"
+                      aria-label="aadharnum"
+                      name="aadharnum"
                       aria-describedby="basic-addon1"
                     />
                   </InputGroup>
@@ -190,16 +157,6 @@ class Signup extends react.Component {
                     />
                   </InputGroup>
 
-                  <InputGroup className="mb-3 ">
-                  <InputGroup.Text id="basic-addon1">Avatar</InputGroup.Text>
-                    <FormControl
-                      type="file"
-                      name="avatar"
-                      onChange={this.loadimages}
-                      aria-label="avatar"
-                      aria-describedby="basic-addon1"
-                    />
-                  </InputGroup>
                   <h2 style={{"width": "100%", "text-align": "center"}} className="mt-4 mb-4">Bank Details</h2>
 
                   <InputGroup className="mb-3 ">
@@ -247,20 +204,9 @@ class Signup extends react.Component {
                       aria-describedby="basic-addon1"
                     />
                   </InputGroup>
-                  <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1">Salary Slip </InputGroup.Text>
-                    <FormControl
-                      type="file"
-                      name="sslips"
-                      onChange={this.loadimages}
-                      aria-label="sslips"
-                      aria-describedby="basic-addon1"
-                      multiple
-                    />
-                  </InputGroup>
                   <button
                     className="button_bg p-2"
-                    type="submit">
+                    type="submit" value="signup">
                     SignUp
                   </button>
                 </Stack>
