@@ -15,7 +15,6 @@ class Home extends react.Component {
     return (
       <>
         <Header />
-        {/* <br></br> */}
         <Container className="bg-dark p-md-5 p-2 mt-2 ">
           <h1 className="center p-2">
             <img src={loan} alt="logo" className="img_size"></img> Lending

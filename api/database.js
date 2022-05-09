@@ -2,19 +2,24 @@
 const URI = "mongodb+srv://manchurianhotdog:VUpYHt2jaG9IiRW4@fliprr.jbq9y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const Mongodb = require("mongodb");
 const client = new Mongodb.MongoClient(URI);
+const url = require("url");
 // API Imports
 var Cibil = require("../modules/cibil.js")
 
 async function get(req,res){
     try {
         // fetch request data
-        let query = req.body;
-
+        let query = url.parse(req.url,true).query;
+        let rdata = [];
         // fetch the posts
         await client.connect();
         const db = client.db("Flipr");
-        let rdata = await db.collection(req.body.type).findOne({"_id": Mongodb.ObjectID(query._id)});
-
+        if(query.type === "Users"){
+            rdata = await db.collection(query.type).findOne({"_id": Mongodb.ObjectID(query._id)}).toArray();
+        }
+        else {
+            rdata = await db.collection(query.type).find().toArray();
+        }
         await client.close();
         // return the posts
         return {
@@ -36,7 +41,7 @@ async function update(req, res) {
         await client.connect();
         let db = client.db("Flipr");
         // get body data
-        let query = req.body;
+        let query = url.parse(req.url,true).query;
         // set update data
         let udata = {};
         if(query.type === "Users"){
@@ -82,7 +87,6 @@ async function update(req, res) {
                 interestrate: query.interestrate,
                 time:query.time,
                 offeres: query.offers,
-                daysleft: query.daysleft,
             }
 
         }
@@ -105,10 +109,22 @@ async function update(req, res) {
                 amount: query.amount,
                 payable: query.payable,
                 interestrate: query.interestrate,
-                daysemi: query.daysemi,
+                dateofemi: query.dateofemi,
                 emi: query.emi,
                 penalty: query.penalty,
                 emileft: query.emileft,
+            }
+        }
+        else if(query.type === "RequestHistory"){
+            udata = {
+                requestid: query.requestid,
+                accepted: query.accepted,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                payable: query.payable,
+                interestrate: query.interestrate,
+                time: query.time,
             }
         }
         else{
@@ -142,8 +158,8 @@ async function Delete(req, res) {
         let db = client.db("Flipr");
 
         // Deleting the post
-        await db.collection(req.body.type).deleteOne({
-            "_id": Mongodb.ObjectID(req.body._id),
+        await db.collection(url.parse(req.url,true).query.type).deleteOne({
+            "_id": Mongodb.ObjectID(url.parse(req.url,true).query._id),
         });
         await client.close();
         // returning a message
@@ -166,7 +182,7 @@ async function add(req, res) {
         await client.connect();
         const db = client.db("Flipr");
         // set user query
-        let query = req.body;
+        let query = url.parse(req.url,true).query;
         //  set add data
         let adata = {};
         if(query.type === "Users"){
@@ -202,6 +218,7 @@ async function add(req, res) {
                 interestrate: query.interestrate,
                 time: query.time,
                 paid: query.paid,
+                date: new Date(),
             }
         }
         else if(query.type === "LoanRequest"){
@@ -212,7 +229,7 @@ async function add(req, res) {
                 interestrate: query.interestrate,
                 time:query.time,
                 offeres: [],
-                daysleft: 20,
+                date: new Date(),
             }
 
         }
@@ -225,6 +242,7 @@ async function add(req, res) {
                 amount: query.amount,
                 interestrate: query.interestrate,
                 time: query.time,
+                date: new Date(),
             }
         }
         else if(query.type === "ActiveLoans"){
@@ -235,10 +253,23 @@ async function add(req, res) {
                 amount: query.amount,
                 payable: query.payable,
                 interestrate: query.interestrate,
-                daysemi: query.daysemi,
+                dateofemi: query.dateofemi,
                 emi: query.emi,
                 penalty: query.penalty,
                 emileft: query.emileft,
+            }
+        }
+        else if(query.type === "RequestHistory"){
+            adata = {
+                requestid: query.requestid,
+                accepted: query.accepted,
+                borrower: query.borrower,
+                lender: query.lender,
+                amount: query.amount,
+                payable: query.payable,
+                interestrate: query.interestrate,
+                time: query.time,
+                finaldate: new Date(),
             }
         }
         else{
@@ -272,7 +303,8 @@ async function handler(req, res){
         success: false,
         message: "Invalid Request Type ! ",
     };
-    switch(req.method){
+    const query = url.parse(req.url,true).query;
+    switch(query.method){
         case "GET"      :
             response = await get(req, res);
             break;
@@ -286,7 +318,7 @@ async function handler(req, res){
             response = await update(req, res);
             break;
     }
-    res.status(200).json(response);
     console.log(`API response : ${response.success}`);
+    return res.status(200).json(response);
 }
 exports.execute = handler;
