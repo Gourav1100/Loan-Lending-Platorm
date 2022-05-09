@@ -1,5 +1,5 @@
 import react from "react";
-import {InputGroup, FormControl, Card, Button } from "react-bootstrap";
+import { InputGroup, FormControl, Card, Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 class Loancard extends react.Component {
@@ -32,34 +32,34 @@ class Loancard extends react.Component {
                   <tr>
                     <td></td>
                     <td><InputGroup className="mb-3">
-                    <InputGroup.Text id="basic-addon1"></InputGroup.Text>
-                    <FormControl
-                      placeholder="Amount"
-                      aria-label="Amount"
-                      aria-describedby="basic-addon1"
-                      type="number"
-                    />
-                  </InputGroup></td>
+                      <InputGroup.Text id="basic-addon1"></InputGroup.Text>
+                      <FormControl
+                        placeholder="Amount"
+                        aria-label="Amount"
+                        aria-describedby="basic-addon1"
+                        type="number"
+                      />
+                    </InputGroup></td>
                     <td><InputGroup className="mb-3">
-                    <InputGroup.Text id="basic-addon1"></InputGroup.Text>
-                    <FormControl
-                      placeholder="Interest Rate"
-                      aria-label="Interest Rate"
-                      aria-describedby="basic-addon1"
-                      type="number"
-                    />
-                  </InputGroup></td>
+                      <InputGroup.Text id="basic-addon1"></InputGroup.Text>
+                      <FormControl
+                        placeholder="Interest Rate"
+                        aria-label="Interest Rate"
+                        aria-describedby="basic-addon1"
+                        type="number"
+                      />
+                    </InputGroup></td>
                     <td><InputGroup className="mb-3">
-                    <InputGroup.Text id="basic-addon1"></InputGroup.Text>
-                    <FormControl
-                      placeholder="Borrowing Period"
-                      aria-label="Borrowing Period"
-                      aria-describedby="basic-addon1"
-                      type="number"
-                    />
-                  </InputGroup></td>
-                    <td></td>
+                      <InputGroup.Text id="basic-addon1"></InputGroup.Text>
+                      <FormControl
+                        placeholder="Borrowing Period"
+                        aria-label="Borrowing Period"
+                        aria-describedby="basic-addon1"
+                        type="number"
+                      />
+                    </InputGroup></td>
                     <td>{this.props.date}</td>
+                    <td></td>
                   </tr>
                 </tbody>
               </Table>

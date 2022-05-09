@@ -5,6 +5,7 @@ import Home from "./pages/home/home.js";
 import Login from "./pages/login/login.js";
 import Dashboard from "./pages/dashboard/dashboard.js";
 import Request from "./pages/requests/requests.js";
+import Signup from './pages/signup/signup.js';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -27,6 +28,7 @@ root.render(
             <Route path = "/dashboard" element = {<Dashboard />} />
             <Route path = "/requests" element = {<Request />} />
             <Route path = "/market" element = {<Market />} />
+            <Route path = "/signup" element = {<Signup />} />
           </Route>
         </Routes>
       </BrowserRouter>
