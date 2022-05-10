@@ -59,7 +59,7 @@ async function update(req, res) {
                 email: query.email,
                 address: query.address,
                 aadharnum: query.aadharnum,
-                 
+                pannum: query.pannum,
                 photo: query.photo,
                 cibil: Cibil.cibil(query.noloans, query.loansrepaid),
                 country: query.country,
