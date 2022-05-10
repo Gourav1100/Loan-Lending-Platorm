@@ -253,15 +253,24 @@ async function add(req, res) {
         }
         else if(query.type === "LoanOffer"){
             adata = {
-                offerid: query.offerid,
-                requestid: query.requestid,
-                borrower: query.borrower,
-                lender: query.lender,
+                requestid: Mongodb.ObjectID(query.requestid),
+                borrower: Mongodb.ObjectID(query.borrower),
+                lender: Mongodb.ObjectID(query.lender),
                 amount: query.amount,
                 interestrate: query.interestrate,
                 time: query.time,
                 date: new Date(),
             }
+            let re = await db.collection("LoanOffer").insertOne(adata);
+            re = re.insertedId;
+            let req = await db.collection("LoanRequest").findOne({"_id" : Mongodb.ObjectID(adata.requestid)});
+            req = req.offeres;
+            req.push(re);
+            await db.collection("LoanRequest").updateOne({"_id" : Mongodb.ObjectID(adata.requestid)}, {$set: {"offeres" : req}});
+            return {
+                message: 'Data updated successfully',
+                success: true,
+            };
         }
         else if(query.type === "ActiveLoans"){
             adata = {
