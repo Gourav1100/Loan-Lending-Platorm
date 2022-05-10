@@ -20,15 +20,15 @@ async function get(req,res){
             rdata = await db.collection("Users").findOne({email : query.email, password: query.password});
         }
         else if (query.type == "MoneyLended"){
-            rdata = await db.collection("LoanHistory").find({"lender": Mongodb.ObjectID(query.userid)}).toArray();
+            console.log("here");
+            rdata = await db.collection("LoanHistory").find({lender: Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "MoneyBorrowed"){
-            rdata = await db.collection("LoanHistory").find({"borrower": Mongodb.ObjectID(query.userid)}).toArray();
+            rdata = await db.collection("LoanHistory").find({borrower: Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "GetUsername"){
-            rdata = await db.collection("Users").find({"_id": Mongodb.ObjectID(query.userid)}).toArray();
-            rdata = rdata[0].username;
-            return rdata;
+            rdata = await db.collection("Users").findOne({"_id": Mongodb.ObjectID(query.userid)});
+            rdata = rdata.username;
         }
         else {
             rdata = await db.collection(query.type).find().toArray();
@@ -38,7 +38,7 @@ async function get(req,res){
         if(rdata === [] || rdata === null){
             return {
                 message: "No Entry Found.",
-                success: "False",
+                success: false,
             }
         }
         return {
@@ -100,7 +100,6 @@ async function update(req, res) {
         }
         else if(query.type === "LoanRequest"){
             udata = {
-                requestid: query.requestid,
                 borrower: query.borrower,
                 amount: query.amount,
                 interestrate: query.interestrate,
@@ -226,6 +225,7 @@ async function add(req, res) {
                 notifications: [],
                 noloans: query.noloans,
                 loansrepaid: query.loansrepaid,
+                datecreated: new Date(),
             }
         }
         else if( query.type === "LoanHistory" ) {
@@ -242,8 +242,7 @@ async function add(req, res) {
         }
         else if(query.type === "LoanRequest"){
             adata = {
-                requestid: query.requestid,
-                borrower: query.borrower,
+                borrower: Mongodb.ObjectID(query.borrower),
                 amount: query.amount,
                 interestrate: query.interestrate,
                 time:query.time,
@@ -336,6 +335,7 @@ async function handler(req, res){
             response = await update(req, res);
             break;
     }
+    console.log(response);
     console.log(`API response : ${response.success}`);
     return res.status(200).json(response);
 }

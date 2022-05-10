@@ -12,6 +12,10 @@ import Loans from "../../components/Loans/loans";
 
 class Dashboard extends react.Component {
   render() {
+    if(!window.sessionStorage.getItem("userid")){
+      window.location.replace("/login");
+      return <>Unauthenticated access ! redirecting...</>;
+    }
     return (
       <>
         <Dheader username = {window.sessionStorage.getItem("username")? window.sessionStorage.getItem("username") : "User"} />

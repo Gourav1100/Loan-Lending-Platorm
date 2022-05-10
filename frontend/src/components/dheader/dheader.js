@@ -7,14 +7,9 @@ import notification from "../../icons/notification.png";
 
 class Dheader extends react.Component {
   opennotification = () => {
-    document.getElementById("controlled-tab-tab-contact").click();
+    document.getElementById("controlled-tab-tab-notifications").click();
   };
   render(props) {
-    if (
-      window.sessionStorage.getItem("userid") === null ||
-      window.sessionStorage.getItem("userid") === ""
-    ) {
-    }
 
     return (
       <div className="header">

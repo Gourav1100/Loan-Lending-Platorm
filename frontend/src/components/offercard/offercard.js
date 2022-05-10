@@ -51,15 +51,15 @@ class OfferCard extends react.Component {
                 <thead>
                   <tr>
                     <th>Bidder</th>
-                    <th>Amount</th>
-                    <th>Interest Rate</th>
-                    <th>Borrowing Period</th>
-                    <th>Disposal Date</th>
+                    <th>Amount (INR)</th>
+                    <th>Interest Rate (%)</th>
+                    <th>Borrowing Period (yrs)</th>
+                    <th>Proposal Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{this.props.lender}</td>
+                    <td>{this.props.bidder}</td>
                     <td>{this.props.amount}</td>
                     <td>{this.props.interestrate}</td>
                     <td>{this.props.time}</td>

@@ -24,41 +24,38 @@ class Loans extends react.Component {
         };
     }
     componentDidMount(){
-       
+        
         axios.post("http://localhost:5000/api/database",{
             type: "MoneyLended",
-            userid: "6279924a8a48a3dff9e9288f",//window.sessionStorage.getItem("userid"), 
+            userid: window.sessionStorage.getItem("userid"), 
             method: "GET",
         }).then((res) => {
-            axios.post("http://localhost:5000/api/database",{
-                type: "MoneyBorrowed",
-                userid: "6279924a8a48a3dff9e9288f" ,//window.sessionStorage.getItem("userid"), 
-                method: "GET",
-            }).then((res1) => {
-                this.setState({
-                    data: res.data.message,
-                    data1: res1.data.message,
-                    DataisLoaded: true,
-                    Data1isLoaded: true,
-                })
-            });    
-        });
-
-        
-        
+            if(res.data.success===true){
+                axios.post("http://localhost:5000/api/database",{
+                    type: "MoneyBorrowed",
+                    userid: window.sessionStorage.getItem("userid"), 
+                    method: "GET",
+                }).then((res1) => {
+                    if(res1.data.success===true){
+                        var flag = (res.data.message===[]?false:true);
+                        this.setState({
+                            data: res.data.message,
+                            data1: res1.data.message,
+                            DataisLoaded: flag,
+                            Data1isLoaded: res1.data.message===[]?!flag:flag,
+                        });
+                        return true;
+                    }
+                });
+                return true;
+            }    
+        }); 
     }
 
     
 
     render(props){
-        if(!this.state.DataisLoaded || !this.state.Data1isLoaded)
-        {
-            return(<>
-            Data is loading
-            </>)
-        }
-        
-        return(
+        var renderElement = (
             <>
             <h3 className="p-2 mt-4" >Money Lended</h3>
             {
@@ -69,7 +66,7 @@ class Loans extends react.Component {
                     month = DATE.getMonth();
                     year = DATE.getFullYear();
                     return (<>
-                        <Lcard bidder={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={(day + "-"+  month +"-" + year)}/>
+                        <OfferCard bidder={item.lender} amount={item.amount} interestrate={item.interestrate} time={item.time} finaldate={(day + "-"+  month +"-" + year)}/>
                     </>);
                 })
             }
@@ -85,12 +82,24 @@ class Loans extends react.Component {
 
                     
                     return (<>
-                        <OfferCard bidder={item.lender} amount={item.amount} interestrate={item.interestrate} time={item.time} finaldate={(day + "-"+  month +"-" + year)} />
+                        <Lcard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={(day + "-"+  month +"-" + year)} needbutton = {false} />
                     </>);
                 })
             }
             </>
         );
+        if(!this.state.DataisLoaded && !this.state.Data1isLoaded)
+        {
+            return(<>
+            <h3>Data is loading...</h3>
+            </>)
+        }
+        else if(this.state.DataisLoaded && this.state.Data1isLoaded )
+        {
+            return renderElement;
+        }
+        return (<>No data available.</>)
+        
     }
 }
 

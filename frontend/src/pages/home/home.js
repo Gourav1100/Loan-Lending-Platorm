@@ -10,8 +10,10 @@ import slide2 from "../../slideshow/slide2.jpg";
 import slide3 from "../../slideshow/slide3.jpg";
 import loan from "../../icons/loan.png";
 class Home extends react.Component {
+  clicked = (event) =>{
+    window.location.replace(`/${event.target.name}`);
+  }
   render() {
-    
     return (
       <>
         <Header />
@@ -60,9 +62,11 @@ class Home extends react.Component {
               <Col lg={{ span: 7 }} md={{ span: 12 }} sm={{ span: 12 }}>
                 <div className="d-grid gap-2">
                   <button
+                    name="login"
                     variant="primary"
                     size="lg"
                     className="button_bg p-2 mt-5 mb-2"
+                    onClick = {this.clicked}
                   >
                     Ask for Loan
                   </button>
@@ -71,8 +75,10 @@ class Home extends react.Component {
               <Col>
                 <div className="d-grid gap-2">
                   <button
+                    name="market"
                     variant="primary"
                     size="lg"
+                    onClick={this.clicked}
                     className="button_bg p-2 mt-5 mb-2"
                   >
                     Give a Loan

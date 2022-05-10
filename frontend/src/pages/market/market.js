@@ -26,6 +26,7 @@ class Market extends react.Component {
                     data: res.data.message,
                     DataisLoaded: true,
                 })
+                return true;
             }
             alert(`Error: ${res.data.message}`);
             return false;

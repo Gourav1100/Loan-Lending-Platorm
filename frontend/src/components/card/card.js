@@ -52,7 +52,7 @@ class Loancard extends react.Component {
                     <td><InputGroup className="mb-3">
                       <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                       <FormControl
-                        placeholder="Borrowing Period"
+                        placeholder="Borrowing Period (yrs)"
                         aria-label="Borrowing Period"
                         aria-describedby="basic-addon1"
                         type="number"

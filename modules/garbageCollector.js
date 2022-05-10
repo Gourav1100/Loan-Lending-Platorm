@@ -70,5 +70,34 @@ async function EMIPenalty(req, res){
         });
     }
 }
+
+async function sslipcond(req, res){
+    try{
+        var d = new Date();
+        d.setHours(0,0,0);
+        d.setDate(d.getDate() - 2);
+        await client.connect();
+        const db = client.db("Flipr");
+        let usr = await db.collection("Users").find({"sslip" : null}).toArray();
+        for (var i = 0; i < usr.length; i++){
+            if (usr[i].datecreated < d){
+                await db.collection("Users").deleteOne({"_id" : Mongodb.ObjectID(usr._id)});
+            }
+        }
+        return res.status(200).json({
+            success: true,
+            message: "success",
+        });
+    } catch (err) {
+        // return the error
+        return res.status(200).json({
+            message: new err.message,
+            success: false,
+        });
+    }
+
+}
+
 exports.Beyond20days = Beyond20days;
 exports.EMIPenalty = EMIPenalty;
+exports.sslipcond = sslipcond;
