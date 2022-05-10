@@ -54,7 +54,7 @@ class Loans extends react.Component {
         if(!this.state.DataisLoaded || !this.state.Data1isLoaded)
         {
             return(<>
-            Data is loading
+            <h3>Data is loading</h3>
             </>)
         }
         
