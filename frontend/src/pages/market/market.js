@@ -18,9 +18,10 @@ class Market extends react.Component {
     }
     componentDidMount(){
         axios.post("http://localhost:5000/api/database",{
-            type: "LoanOffer",
+            type: "LoanRequest",
             method: "GET",
         }).then((res) => {
+            console.log(res);
             if(res.data.success===true){
                 this.setState({
                     data: res.data.message,
@@ -32,16 +33,17 @@ class Market extends react.Component {
         });
     }
     render(){
-        const {data, DataisLoaded} = this.state;
-        if(!DataisLoaded){
+        if(!this.state.DataisLoaded){
             return (<>Data is being loaded... Please wait</>)
         }
+        console.log(this.state.data);
         return (
             <>
                 <Header />
                 <Container className="p-md-2 p-5 mt-2 mb-2">
                     {
-                        data.map((item)=>{
+                        this.state.data.map((item)=>{
+                            console.log(item);
                             return (<>
                                 <Loancard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} requestid = {item.requestid} />
                             </>);
