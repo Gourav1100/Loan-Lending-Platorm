@@ -1,13 +1,43 @@
 import react from "react";
 import NotificationCard from "../notification_card/notification_card";
+import axios from "axios";
+import req from "express/lib/request";
 
 class Notifications extends react.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      notifications: [],
+      notificationsisloaded: false,
+    }
+  }
+  componentDidMount(){
+    axios.post("http://localhost:5000/api/database",{
+      type: "Notif",
+      _id: window.sessionStorage.getItem("userid"),
+      method: "GET",
+    }).then((res) => {
+      if(res.data.success===true){
+        this.setState({
+          notifications: req.data.message,
+          notificationsisloaded: true,
+        })
+      }
+    });
+  }
   render(props) {
+    if(!this.state.notificationsisloaded){
+      return <>Loading notifications</>
+    }
     return (
       <>
         <h2 className="m-2 p-2 center">Your Notifications</h2>
-        <hr className="h_break"></hr>
-        <NotificationCard />
+        {
+            this.state.notifications?this.state.notifications.map((item)=>{
+              var DATE = new Date (item.time);
+              return <><NotificationCard notificationtext={item.msg} hour={DATE.getHours()} min={DATE.getMinutes()} /></>
+            }):""
+        }
       </>
     );
   }

@@ -17,6 +17,10 @@ async function get(req,res){
         if(query.type === "Users"){
             rdata = await db.collection(query.type).findOne({_id : Mongodb.ObjectID(query._id)});
         }
+        else if(query.type === "Notif"){
+            rdata = await db.collection("Users").findOne({_id : Mongodb.ObjectID(query._id)});
+            rdata = rdata.notifications;
+        }
         else if(query.type==="Login"){
             rdata = await db.collection("Users").findOne({email : query.email, password: query.password});
         }

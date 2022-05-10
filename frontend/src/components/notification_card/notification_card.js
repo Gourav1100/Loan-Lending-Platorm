@@ -7,7 +7,7 @@ class NotificationCard extends react.Component {
     return (
       <>
         <Card className="blue">
-          <Card.Header as="h5"></Card.Header>
+          <Card.Header as="h5">{this.props.hour.toString().length==1?"0":""}{this.props.hour} : {this.props.min.toString().length==1?"0":""}{this.props.min}</Card.Header>
           <Card.Body>
             <Card.Text>{this.props.notificationtext}</Card.Text>
           </Card.Body>
