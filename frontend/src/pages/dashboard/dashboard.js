@@ -28,7 +28,7 @@ class Dashboard extends react.Component {
                     name={window.sessionStorage.getItem("name")}
                     username={window.sessionStorage.getItem("username")}
                     phone={window.sessionStorage.getItem("phone")}
-                    Email={window.sessionStorage.getItem("Email")}
+                    Email={window.sessionStorage.getItem("email")}
                     address={window.sessionStorage.getItem("address")}
                     country={window.sessionStorage.getItem("country")}
                     aadhar={window.sessionStorage.getItem("aadhar")}
@@ -39,7 +39,6 @@ class Dashboard extends react.Component {
                     ctc={window.sessionStorage.getItem("ctc")}
                     activeloans={window.sessionStorage.getItem("activeloans")}
                     completedloans={window.sessionStorage.getItem("completedloans")}
-                    offeredloans={window.sessionStorage.getItem("offeredloans")}
                   />
                 </Tab>
                 <Tab eventKey="home" title="Requests">
@@ -54,8 +53,8 @@ class Dashboard extends react.Component {
                 <Tab eventKey="notifications" title="Notifications" className="tabs">
                   <Notifications />
                 </Tab>
-                
-                
+
+
               </Tabs>
             </Col>
           </Row>

@@ -21,11 +21,14 @@ class Market extends react.Component {
             type: "LoanOffer",
             method: "GET",
         }).then((res) => {
-
-        this.setState({
-                data: res.data.message,
-                DataisLoaded: true,
-            })
+            if(res.data.success===true){
+                this.setState({
+                    data: res.data.message,
+                    DataisLoaded: true,
+                })
+            }
+            alert(`Error: ${res.data.message}`);
+            return false;
         });
     }
     render(){
@@ -33,7 +36,6 @@ class Market extends react.Component {
         if(!DataisLoaded){
             return (<>Data is being loaded... Please wait</>)
         }
-        console.log(data);
         return (
             <>
                 <Header />

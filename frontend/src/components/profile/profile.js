@@ -137,16 +137,10 @@ class Profile extends react.Component {
               {this.tab}
               {this.props.completedloans}
             </h3>
-            <h3>
-              Offered Loans{this.tab}
-              {this.tab}:{this.tab}
-              {this.tab}
-              {this.props.offeredloans}
-            </h3>
-            <br></br>
+            <br />
             <hr className = "h_break"></hr>
             <h1 className="center">Update Salary Slips</h1>
-            <br></br>
+            <br />
             <form className="center">
             <InputGroup className="mb-3 ">
                     <InputGroup.Text id="basic-addon1">Salary Slip </InputGroup.Text>
@@ -164,8 +158,8 @@ class Profile extends react.Component {
                     Submit
                   </button>
                   </InputGroup>
-           
-            
+
+
                   </form>
           </Col>
         </Row>

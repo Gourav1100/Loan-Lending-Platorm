@@ -2,7 +2,6 @@
 const URI = "mongodb+srv://manchurianhotdog:VUpYHt2jaG9IiRW4@fliprr.jbq9y.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const Mongodb = require("mongodb");
 const client = new Mongodb.MongoClient(URI);
-const url = require("url");
 // API Imports
 var Cibil = require("../modules/cibil.js")
 
@@ -15,7 +14,10 @@ async function get(req,res){
         await client.connect();
         const db = client.db("Flipr");
         if(query.type === "Users"){
-            rdata = await db.collection(query.type).findOne({"_id": Mongodb.ObjectID(query._id)}).toArray();
+            rdata = await db.collection(query.type).findOne({_id : Mongodb.ObjectID(query._id)});
+        }
+        else if(query.type==="Login"){
+            rdata = await db.collection("Users").findOne({email : query.email, password: query.password});
         }
         else if (query.type == "MoneyLended"){
             rdata = await db.collection("LoanHistory").find({"lender": Mongodb.ObjectID(query.userid)}).toArray();
@@ -23,11 +25,22 @@ async function get(req,res){
         else if (query.type == "MoneyBorrowed"){
             rdata = await db.collection("LoanHistory").find({"borrower": Mongodb.ObjectID(query.userid)}).toArray();
         }
+        else if (query.type == "GetUsername"){
+            rdata = await db.collection("Users").find({"_id": Mongodb.ObjectID(query.userid)}).toArray();
+            rdata = rdata[0].username;
+            return rdata;
+        }
         else {
             rdata = await db.collection(query.type).find().toArray();
         }
         await client.close();
         // return the posts
+        if(rdata === [] || rdata === null){
+            return {
+                message: "No Entry Found.",
+                success: "False",
+            }
+        }
         return {
             message: rdata,
             success: true,
@@ -35,7 +48,7 @@ async function get(req,res){
     } catch (err) {
         // return the error
         return {
-            message: new err.message,
+            message: err.message,
             success: false,
         };
     }
