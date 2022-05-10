@@ -42,13 +42,13 @@ class Loans extends react.Component {
                         method: "GET",
                     }).then((res1) => {
                         if(res1.data.success===true){
-                            console.log(res1);
                             axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
                                     type: "GetUsername",
                                     userid: res.data.message.borrower, 
                                     method: "GET",
                                 }).then((res2) => {
                                     if(res2.data.success===true){
+                                        console.log(res1);
                                         axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
                                             type: "GetUsername",
                                             userid: res1.data.message.lender, 
@@ -133,7 +133,7 @@ class Loans extends react.Component {
             <h3>Data is loading</h3>
             </>)
         }
-        else if(this.state.DataisLoaded && this.state.Data1isLoaded && this.state.nameBorrowerisLoaded && this.state.nameLenderisLoaded)
+        else if(this.state.DataisLoaded && this.state.Data1isLoaded && this.state.nameBorrowerisLoaded && this.state.nameLenderisLoaded && this.data!=[] && this.data1!=[])
         {
             return renderElement;
         }

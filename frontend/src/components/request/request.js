@@ -27,6 +27,7 @@ class Request extends react.Component {
             borrower: window.sessionStorage.getItem("userid")
         }).then((res) => {
             if(res.data.success===true){
+                console.log(res);
                 this.setState({
                     data: res.data.message,
                     DataisLoaded: true,
