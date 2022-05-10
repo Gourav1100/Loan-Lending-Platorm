@@ -1,5 +1,5 @@
 import react from "react";
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 
@@ -40,6 +40,7 @@ class OfferCard extends react.Component {
       }
     return (
       <>
+      <Container>
         <Card className="blue">
           <Card.Header as="h5"></Card.Header>
           <Card.Body>
@@ -71,6 +72,7 @@ class OfferCard extends react.Component {
             </Card.Text>
           </Card.Body>
         </Card>
+        </Container>
         <hr className="h_break"></hr>
       </>
     );
