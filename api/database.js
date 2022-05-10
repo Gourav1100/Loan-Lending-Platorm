@@ -65,10 +65,11 @@ async function update(req, res) {
         // set update data
         let udata = {};
         if(query.type === "Users"){
+            let rdata = await db.collection(query.type).findOne({_id : Mongodb.ObjectID(query._id)});
             udata = {
                 username: query.username,
                 name: query.name,
-                password: query.password,
+                password: rdata.password,
                 phone: query.phone,
                 email: query.email,
                 address: query.address,

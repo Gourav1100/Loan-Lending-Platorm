@@ -4,6 +4,13 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 
 class Loancard extends react.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      borrower: this.props.borrower,
+      requestid: this.props.requestid,
+    }
+  }
   submit = (event) => {
     event.preventDefault();
     if(!window.sessionStorage.getItem("userid")){
@@ -20,8 +27,8 @@ class Loancard extends react.Component {
       method: "POST",
       type: "LoanOffer",
       lender:(window.sessionStorage.getItem("userid")),
-      borrower:(this.props.borrower), 
-      requestid : (this.props.requestid),
+      borrower:(this.state.borrower), 
+      requestid : (this.state.requestid),
       amount: event.target.amt.value,
       interestrate: event.target.interestrate.value,
       time: event.target.borrowingperiod.value
@@ -81,13 +88,14 @@ class Loancard extends react.Component {
                         aria-label="Interest Rate (%)"
                         aria-describedby="basic-addon1"
                         type="number"
+                        step="0.01"
                       />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                       <FormControl
                       name = "borrowingperiod"
-                        placeholder="Borrowing Period (yrs)"
+                        placeholder="Borrowing Period (months)"
                         aria-label="Borrowing Period"
                         aria-describedby="basic-addon1"
                         type="number"

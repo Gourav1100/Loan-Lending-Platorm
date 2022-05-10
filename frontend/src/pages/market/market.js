@@ -36,7 +36,6 @@ class Market extends react.Component {
         if(!this.state.DataisLoaded){
             return (<>Data is being loaded... Please wait</>)
         }
-        console.log(this.state.data);
         return (
             <>
                 <Header />
@@ -45,7 +44,7 @@ class Market extends react.Component {
                         this.state.data.map((item)=>{
                             console.log(item);
                             return (<>
-                                <Loancard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} requestid = {item.requestid} />
+                                <Loancard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} requestid = {item._id} />
                             </>);
                         })
                     }
