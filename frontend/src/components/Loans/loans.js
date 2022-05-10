@@ -42,6 +42,7 @@ class Loans extends react.Component {
                         method: "GET",
                     }).then((res1) => {
                         if(res1.data.success===true){
+                            console.log(res1);
                             axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
                                     type: "GetUsername",
                                     userid: res.data.message.borrower, 
@@ -59,8 +60,8 @@ class Loans extends react.Component {
                                                     data1: res1.data.message,
                                                     DataisLoaded: true,
                                                     Data1isLoaded: true,
-                                                    nameBorrower: res2.data.message,
-                                                    nameLender: res3.data.message,
+                                                    nameBorrower: res2.data.message.username,
+                                                    nameLender: res3.data.message.username,
                                                     nameBorrowerisLoaded: true,
                                                     nameLenderisLoaded: true,
                                                 })

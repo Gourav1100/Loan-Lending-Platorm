@@ -20,13 +20,14 @@ async function get(req,res){
             rdata = await db.collection("Users").findOne({email : query.email, password: query.password});
         }
         else if (query.type == "MoneyLended"){
-            rdata = await db.collection("LoanHistory").find({"lender": Mongodb.ObjectID(query.userid)}).toArray();
+            rdata = await db.collection("LoanHistory").find({lender: Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "MoneyBorrowed"){
-            rdata = await db.collection("LoanHistory").find({"borrower": Mongodb.ObjectID(query.userid)}).toArray();
+            rdata = await db.collection("LoanHistory").find({borrower: Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "GetUsername"){
             rdata = await db.collection("Users").findOne({"_id": Mongodb.ObjectID(query.userid)});
+            rdata = rdata.username;
         }
         else {
             rdata = await db.collection(query.type).find().toArray();
@@ -36,7 +37,7 @@ async function get(req,res){
         if(rdata === [] || rdata === null){
             return {
                 message: "No Entry Found.",
-                success: "False",
+                success: false,
             }
         }
         return {
