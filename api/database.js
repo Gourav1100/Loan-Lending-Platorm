@@ -32,7 +32,7 @@ async function get(req,res){
             rdata = rdata.username;
         }
         else if(query.type == "LoanOffer"){
-            rdata = await db.collection(query.type).find({"borrower": query.borrower}).toArray();
+            rdata = await db.collection(query.type).find({"borrower": Mongodb.ObjectID(query.borrower)}).toArray();
         }
         else {
             rdata = await db.collection(query.type).find().toArray();
