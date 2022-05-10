@@ -335,7 +335,6 @@ async function handler(req, res){
             response = await update(req, res);
             break;
     }
-    console.log(response);
     console.log(`API response : ${response.success}`);
     return res.status(200).json(response);
 }
