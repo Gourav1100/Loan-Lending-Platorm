@@ -6,9 +6,6 @@ var bodyParser = require("body-parser");
 var schd = require("./modules/scheduler");
 var cors = require("cors");
 var dotenv = require("dotenv");
-var mutter = require("multer");
-var path = require("path");
-
 // load env variables
 dotenv.config();
 // configure server for logging.
@@ -17,6 +14,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use(bodyParser.json());
+app.set("view engine", "ejs");
 
 // accept all requests
 app.all("*", async (req, res, func) => {

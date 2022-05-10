@@ -3,7 +3,8 @@ const URI = "mongodb+srv://manchurianhotdog:VUpYHt2jaG9IiRW4@fliprr.jbq9y.mongod
 const Mongodb = require("mongodb");
 const client = new Mongodb.MongoClient(URI);
 // API Imports
-var Cibil = require("../modules/cibil.js")
+var Cibil = require("../modules/cibil.js");
+var EMIGen = require("../modules/emi.js");
 
 async function get(req,res){
     try {
@@ -111,12 +112,43 @@ async function update(req, res) {
         else if(query.type === "LoanOffer"){
             udata = {
                 offerid: query.offerid,
-                requestid: query.requestid,
-                borrower: query.borrower,
-                lender: query.lender,
-                amount: query.amount,
-                interestrate: query.interestrate,
-                time: query.time,
+                accepted: query.accepted,
+            }
+            console.log(query.accepted);
+            if (query.accepted === "true"){
+                let offer = await db.collection("LoanOffer").findOne({"_id" : Mongodb.ObjectID(query.offerid)});
+                let adata = {
+                    requestid: offer.requestid,
+                    borrower: offer.borrower,
+                    lender: offer.lender,
+                    paid: false,
+                    interestrate: parseFloat(offer.interestrate),
+                    amount: Number(offer.amount),
+                    time: offer.time,
+                    date: new Date(),
+                }
+                let hist = await db.collection("LoanHistory").insertOne(adata);
+                var d = new Date();
+                d.setHours(23,59,59);
+                d.setMonth(d.getMonth() + 1);
+                adata = {
+                    loanid : hist.insertedId,
+                    borrower: offer.borrower,
+                    lender: offer.lender,
+                    interestrate: parseFloat(offer.interestrate),
+                    amount: parseInt(offer.amount),
+                    time: parseInt(offer.time),
+                    emi: EMIGen.emi(parseFloat(offer.interestrate), parseInt(offer.amount), parseInt(offer.time)),
+                    payable: EMIGen.emi(parseFloat(offer.interestrate), parseInt(offer.amount), parseInt(offer.time)) * parseInt(offer.time),
+                    penalty : 0,
+                    emileft: parseInt(offer.time),
+                    dateofemi: d,
+                }
+                await db.collection("ActiveLoans").insertOne(adata);
+                return {
+                    message: 'Data updated successfully',
+                    success: true,
+                };
             }
         }
         else if(query.type === "ActiveLoans"){
@@ -243,9 +275,9 @@ async function add(req, res) {
         else if(query.type === "LoanRequest"){
             adata = {
                 borrower: Mongodb.ObjectID(query.borrower),
-                amount: query.amount,
-                interestrate: query.interestrate,
-                time:query.time,
+                amount: parseInt(query.amount),
+                interestrate: parseFloat(query.interestrate),
+                time:parseInt(query.time),
                 offeres: [],
                 date: new Date(),
             }
@@ -256,9 +288,9 @@ async function add(req, res) {
                 requestid: Mongodb.ObjectID(query.requestid),
                 borrower: Mongodb.ObjectID(query.borrower),
                 lender: Mongodb.ObjectID(query.lender),
-                amount: query.amount,
-                interestrate: query.interestrate,
-                time: query.time,
+                amount: parseInt(query.amount),
+                interestrate: parseFloat(query.interestrate),
+                time: parseInt(query.time),
                 date: new Date(),
             }
             let re = await db.collection("LoanOffer").insertOne(adata);
@@ -344,7 +376,6 @@ async function handler(req, res){
             response = await update(req, res);
             break;
     }
-    console.log(response);
     console.log(`API response : ${response.success}`);
     return res.status(200).json(response);
 }
