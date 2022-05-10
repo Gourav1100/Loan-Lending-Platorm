@@ -21,10 +21,12 @@ class Loans extends react.Component {
             data1:[],
             DataisLoaded: false,
             Data1isLoaded: false,
+            nameBorrower: "",
+            nameLender: "",
         };
     }
     componentDidMount(){
-       
+        
         axios.post("http://localhost:5000/api/database",{
             type: "MoneyLended",
             userid: "6279924a8a48a3dff9e9288f",//window.sessionStorage.getItem("userid"), 
@@ -35,12 +37,29 @@ class Loans extends react.Component {
                 userid: "6279924a8a48a3dff9e9288f" ,//window.sessionStorage.getItem("userid"), 
                 method: "GET",
             }).then((res1) => {
-                this.setState({
-                    data: res.data.message,
-                    data1: res1.data.message,
-                    DataisLoaded: true,
-                    Data1isLoaded: true,
-                })
+                axios.post("http://localhost:5000/api/database",{
+                        type: "GetUsername",
+                        userid: res.data.message.borrower, 
+                        method: "GET",
+                    }).then((res2) => {
+
+                        axios.post("http://localhost:5000/api/database",{
+                        type: "GetUsername",
+                        userid: res1.data.message.lender, 
+                        method: "GET",
+                    }).then((res3) => {
+                        this.setState({
+                            data: res.data.message,
+                            data1: res1.data.message,
+                            DataisLoaded: true,
+                            Data1isLoaded: true,
+                            nameBorrower: res2.data.message,
+                            nameLender: res1.data.message,
+                    })
+
+                       
+                        })
+                    });
             });    
         });
 
@@ -68,8 +87,11 @@ class Loans extends react.Component {
                     day = DATE.getDate();
                     month = DATE.getMonth();
                     year = DATE.getFullYear();
+
+
+                    console.log(this.setState.nameBorrower);
                     return (<>
-                        <Lcard bidder={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={(day + "-"+  month +"-" + year)}/>
+                        <Lcard bidder={this.setState.nameBorrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={(day + "-"+  month +"-" + year)}/>
                     </>);
                 })
             }
@@ -85,7 +107,7 @@ class Loans extends react.Component {
 
                     
                     return (<>
-                        <OfferCard bidder={item.lender} amount={item.amount} interestrate={item.interestrate} time={item.time} finaldate={(day + "-"+  month +"-" + year)} />
+                        <OfferCard bidder={this.setState.nameLender} amount={item.amount} interestrate={item.interestrate} time={item.time} finaldate={(day + "-"+  month +"-" + year)} />
                     </>);
                 })
             }
