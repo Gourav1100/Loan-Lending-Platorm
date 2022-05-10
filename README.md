@@ -1,5 +1,9 @@
 # Loan-Lending-Platorm
-A web application based on node.js with mongoDB database deployed on Microsoft Azure cloud with an aim to provided customer to customer interaction for loan exchange.
+A web application based on node.js with mongoDB database deployed on Microsoft Azure cloud with an aim to provided customer to customer interaction for loan exchange. The application is hosted on Microsoft Azure, the Virtual Machine deployed on the cloud starts the frontend server at port: 3000. The backend is hosted on port: 5000. The website is hosted on 
+```
+http://loanlendingplatform.centralindia.cloudapp.azure.com:3000
+```
+
 <br>
 <h1>The characteristics of the platform are:</h1>
 <ul>
@@ -137,8 +141,17 @@ A web application based on node.js with mongoDB database deployed on Microsoft A
   </p>
   </li>
   </ul>
-    
-  
+
+<h1>Technologies used</h1>
+<ul>
+  <li>Node.js</li>
+  <li>React.js</li>
+  <li>React Bootstrap</li>
+  <li>Microsoft Azure</li>
+  <li>Express.js</li>
+  <li>MongoDB</li>
+ </ul>
+ 
     
 ## Clone Repository 
 ```sh
