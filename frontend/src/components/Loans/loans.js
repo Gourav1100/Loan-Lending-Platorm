@@ -31,76 +31,68 @@ class Loans extends react.Component {
             method: "GET",
         }).then((res) => {
             if(res.data.success===true){
-                console.log(res);
-                axios.post("http://localhost:5000/api/database",{
-                    type: "MoneyBorrowed",
-                    userid: window.sessionStorage.getItem("userid"), 
-                    method: "GET",
-                }).then((res1) => {
-                    if(res1.data.success===true){
-                        console.log(res1);
-                        var flag = (res.data.message===[]?false:true);
-                        this.setState({
-                            data: res.data.message,
-                            data1: res1.data.message,
-                            DataisLoaded: flag,
-                            Data1isLoaded: res1.data.message===[]?!flag:flag,
-                        });
-                        return true;
-                    }
+                console.log("Money Lended : ",res);
+                this.setState({
+                    data: res.data.message,
+                    DataisLoaded: true,
                 });
-                return true;
             }    
         }); 
+        axios.post("http://localhost:5000/api/database",{
+            type: "MoneyBorrowed",
+            userid: window.sessionStorage.getItem("userid"), 
+            method: "GET",
+        }).then((res1) => {
+            if(res1.data.success===true){
+                console.log("Money Borrowed : ",res1);
+                this.setState({
+                    data1: res1.data.message,
+                    Data1isLoaded: true,
+                });
+            }
+        });
     }
 
     
 
     render(props){
-        var renderElement = (
-            <>
-            <h3 className="p-2 mt-4" >Money Borrowed</h3>
-            {
-                this.state.data.map((item)=>{
-                    var DATE = new Date (item.date);
-                    var day, month, year;
-                    day = DATE.getDate();
-                    month = DATE.getMonth();
-                    year = DATE.getFullYear();
-                    return (<>
-                        <OfferCard bidder={item.lender} amount={item.amount} interestrate={item.interestrate} time={item.time} finaldate={(day + "-"+  month +"-" + year)}/>
-                    </>);
-                })
-            }
-          
-            <h3 className="p-2 mt-4" >Money Lended</h3>
-            {
-                this.state.data.map((item)=>{
-                    var DATE = new Date (item.date);
-                    var day, month, year;
-                    day = DATE.getDate();
-                    month = DATE.getMonth();
-                    year = DATE.getFullYear();
-
-                    
-                    return (<>
-                        <Lcard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={(day + "-"+  month +"-" + year)} needbutton = {false} />
-                    </>);
-                })
-            }
-            </>
-        );
         if(!this.state.DataisLoaded && !this.state.Data1isLoaded)
         {
             return(<>
             <h3>Data is loading...</h3>
             </>)
         }
-        else if(this.state.DataisLoaded && this.state.Data1isLoaded )
-        {
-            return renderElement;
-        }
-        return (<>No data available.</>)
+        return (
+            <>
+            <h3 className="p-2 mt-4" >Money Borrowed</h3>
+            {
+                this.state.data1?this.state.data1.map((item)=>{
+                    var DATE = new Date (item.dateofemi);
+                    var day, month, year;
+                    day = DATE.getDate();
+                    month = DATE.getMonth();
+                    year = DATE.getFullYear();
+                    return (<>
+                        <OfferCard loanid={item._id} lender={item.lender} amount={item.amount} interestrate={item.interestrate} time={item.time} emidate={(day + "-"+  month +"-" + year)} emileft={item.emileft} emi={item.emi}/>
+                    </>);
+                }):""
+            }
+          
+            <h3 className="p-2 mt-4" >Money Lended</h3>
+            {
+                this.state.data?this.state.data.map((item)=>{
+                    var DATE = new Date (item.dateofemi);
+                    var day, month, year;
+                    day = DATE.getDate();
+                    month = DATE.getMonth();
+                    year = DATE.getFullYear();
+                    return (<>
+                        <Lcard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} emidate={(day + "-"+  month +"-" + year)} emileft={item.emileft} emi={item.emi} />
+                    </>);
+                }):""
+            }
+            </>
+        );
         
     }
 }

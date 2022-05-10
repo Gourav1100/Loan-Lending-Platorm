@@ -1,4 +1,4 @@
-import OfferCard from "../offercard/offercard.js";
+import OfferComp from "../offercomp/offercomp.js";
 import react from "react";
 import axios from "axios";
 import {
@@ -25,18 +25,16 @@ class Offer extends react.Component {
             method: "GET",
         }).then((res) => {
             if(res.data.success===true){    
-                console.log(res);
+                console.log("Offers: ",res);
                 this.setState({
                     data: res.data.message,
                     DataisLoaded: true,
-                });
-                return true;    
+                }); 
             }
         });
     }
     render(props){
-        const {data, DataisLoaded} = this.state;
-        if(!DataisLoaded){
+        if(!this.state.DataisLoaded){
             return (<><h3>Data is loading...</h3></>)
         }
         return(
@@ -45,11 +43,16 @@ class Offer extends react.Component {
                 <h3 className="p-2" >Your Offers</h3>
             <Container>
             {
-                data.map((item)=>{
+                this.state.data?this.state.data.map((item)=>{
+                    var DATE = new Date (item.date);
+                    var day, month, year;
+                    day = DATE.getDate();
+                    month = DATE.getMonth();
+                    year = DATE.getFullYear();
                     return (<>
-                        <OfferCard bidder={item.lender} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} needbutton={true} />
+                        <OfferComp id={item._id} requestid={item.requestid} lender={item.lender} amount={item.amount} interestrate={item.interestrate} time={item.time} date={day + "-"+  month +"-" + year} />
                     </>);
-                })
+                }):""
                 
             }
             </Container>

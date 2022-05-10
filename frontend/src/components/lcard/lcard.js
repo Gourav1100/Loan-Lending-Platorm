@@ -12,7 +12,7 @@ class Lcard extends react.Component {
         return(
             <>
             <Container>
-                <br></br>
+                <br />
                 
                 <Card className="blue">
           <Card.Header as="h5"></Card.Header>
@@ -22,20 +22,22 @@ class Lcard extends react.Component {
               <Table striped bordered hover responsive="md">
                 <thead>
                   <tr>
-                    <th>Borrower</th>
-                    <th>Amount</th>
-                    <th>Interest Rate (%)</th>
-                    <th>Borrowing Period</th>
-                    <th>Date of post</th>
+                    <th className="tabledata">Borrower</th>
+                    <th className="tabledata">Amount (INR) [EMI]</th>
+                    <th className="tabledata">Interest Rate (%)</th>
+                    <th className="tabledata">Borrowing Period (months)</th>
+                    <th className="tabledata">EMI Date</th>
+                    <th className="tabledata">EMI Left</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{this.props.borrower}</td>
-                    <td>{this.props.amount}</td>
-                    <td>{this.props.interestrate}</td>
-                    <td>{this.props.time}</td>
-                    <td>{this.props.date}</td>
+                    <td className="tabledata">{this.props.borrower}</td>
+                    <td className="tabledata">{this.props.amount} [{parseInt(this.props.emi)}]</td>
+                    <td className="tabledata">{this.props.interestrate}</td>
+                    <td className="tabledata">{this.props.time}</td>
+                    <td className="tabledata">{this.props.emidate}</td>
+                    <td className="tabledata">{this.props.emileft}</td>
                   </tr>
                     
                     </tbody>

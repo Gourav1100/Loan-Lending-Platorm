@@ -18,18 +18,16 @@ class Market extends react.Component {
     }
     componentDidMount(){
         axios.post("http://localhost:5000/api/database",{
-            type: "LoanRequest",
+            type: "Market",
             method: "GET",
         }).then((res) => {
-            
             if(res.data.success===true){
+                console.log("Market : ",res.data);
                 this.setState({
                     data: res.data.message,
                     DataisLoaded: true,
                 })
-                return true;
             }
-            return false;
         });
     }
     render(){
@@ -41,12 +39,12 @@ class Market extends react.Component {
                 <Header />
                 <Container className="p-md-2 p-5 mt-2 mb-2">
                     {
-                        this.state.data.map((item)=>{
+                        this.state.data?this.state.data.map((item)=>{
                             console.log(item);
                             return (<>
                                 <Loancard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} requestid = {item._id} />
                             </>);
-                        })
+                        }): "No Offer available now !"
                     }
                 </Container>
                 <Footer />

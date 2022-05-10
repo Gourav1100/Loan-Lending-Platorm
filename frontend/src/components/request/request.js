@@ -27,13 +27,12 @@ class Request extends react.Component {
             borrower: window.sessionStorage.getItem("userid")
         }).then((res) => {
             if(res.data.success===true){
-                console.log(res);
+                console.log("request: ",res);
                 this.setState({
                     data: res.data.message,
                     DataisLoaded: true,
                     visible: false,
                 });
-                return true;
             }
             
         });
@@ -46,14 +45,14 @@ class Request extends react.Component {
         const check = this.state.visible ? <Newrequest /> : (
             <>
                 {
-                    this.state.data.map((item)=>{
+                    this.state.data?this.state.data.map((item)=>{
                         return <RequestCard 
                         amount = {item.amount}
                         interestrate = {item.interestrate}
                         time = {item.time}
                         finaldate = {item.finaldate}
                     />
-                    })
+                    }):""
                 }
             </>
         );

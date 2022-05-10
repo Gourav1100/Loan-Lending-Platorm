@@ -66,6 +66,7 @@ class Newrequest extends react.Component {
                       aria-label="Interest Rate"
                       aria-describedby="basic-addon1"
                       type="number"
+                      step="0.01"
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">

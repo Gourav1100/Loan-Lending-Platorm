@@ -21,11 +21,10 @@ async function get(req,res){
             rdata = await db.collection("Users").findOne({email : query.email, password: query.password});
         }
         else if (query.type == "MoneyLended"){
-            console.log("here");
-            rdata = await db.collection("LoanHistory").find({lender: Mongodb.ObjectID(query.userid)}).toArray();
+            rdata = await db.collection("ActiveLoans").find({lender: Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "MoneyBorrowed"){
-            rdata = await db.collection("LoanHistory").find({borrower: Mongodb.ObjectID(query.userid)}).toArray();
+            rdata = await db.collection("ActiveLoans").find({borrower: Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "GetUsername"){
             rdata = await db.collection("Users").findOne({"_id": Mongodb.ObjectID(query.userid)});
@@ -33,6 +32,12 @@ async function get(req,res){
         }
         else if(query.type == "LoanOffer"){
             rdata = await db.collection(query.type).find({"borrower": Mongodb.ObjectID(query.borrower)}).toArray();
+        }
+        else if(query.type == "LoanRequest"){
+            rdata = await db.collection(query.type).find({"borrower": Mongodb.ObjectID(query.borrower)}).toArray();
+        }
+        else if(query.type == "Market"){
+            rdata = await db.collection("LoanRequest").find().toArray();
         }
         else {
             rdata = await db.collection(query.type).find().toArray();
@@ -129,7 +134,7 @@ async function update(req, res) {
                 let hist = await db.collection("LoanHistory").insertOne(adata);
                 var d = new Date();
                 d.setHours(23,59,59);
-                d.setMonth(d.getMonth() + 1);
+                d.setMonth(d.getMonth() + 2);
                 adata = {
                     loanid : hist.insertedId,
                     borrower: offer.borrower,
@@ -166,7 +171,7 @@ async function update(req, res) {
                     success: true,
                 };
             }
-            else{
+            else if(query.accepted ==="false"){
                 let reqid = await db.collection("LoanOffer").findOne({"_id": Mongodb.ObjectID(query.offerid)})
                 await db.collection("LoanOffer").deleteOne({"_id": Mongodb.ObjectID(query.offerid)});
                 let req = await db.collection("LoanRequest").findOne({"_id":reqid.requestid});
