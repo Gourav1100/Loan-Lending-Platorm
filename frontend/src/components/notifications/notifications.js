@@ -1,7 +1,6 @@
 import react from "react";
 import NotificationCard from "../notification_card/notification_card";
 import axios from "axios";
-import req from "express/lib/request";
 
 class Notifications extends react.Component {
   constructor(props){
@@ -18,8 +17,9 @@ class Notifications extends react.Component {
       method: "GET",
     }).then((res) => {
       if(res.data.success===true){
+        console.log("Notifications",res.data.message);
         this.setState({
-          notifications: req.data.message,
+          notifications: res.data.message,
           notificationsisloaded: true,
         })
       }
