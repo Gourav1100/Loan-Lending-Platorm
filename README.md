@@ -87,6 +87,10 @@ The Database and the flow chart for the website is represented as:
         <li>The <b>confirmation after paying the EMI</b> is also logged in the notifications.</li>
         <li>In case <b>penalty is imposed</b>, the user is notified about the same- each day till he pays his EMI</li>
     </ul>
+    <br>
+    <img src = "https://user-images.githubusercontent.com/77777434/167668689-8f0d64f6-5f33-42fb-8503-9ab35daccb19.jpeg" />
+    
+     The user is also sent an email, along with the notification. 
     
   </ul>
   <br>
