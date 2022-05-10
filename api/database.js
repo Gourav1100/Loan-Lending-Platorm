@@ -26,8 +26,7 @@ async function get(req,res){
             rdata = await db.collection("LoanHistory").find({"borrower": Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "GetUsername"){
-            rdata = await db.collection("Users").find({"_id": Mongodb.ObjectID(query.userid)}).toArray();
-            rdata = rdata[0].username;
+            rdata = await db.collection("Users").findOne({"_id": Mongodb.ObjectID(query.userid)});
         }
         else {
             rdata = await db.collection(query.type).find().toArray();
