@@ -21,7 +21,7 @@ class Market extends react.Component {
             type: "LoanRequest",
             method: "GET",
         }).then((res) => {
-            console.log(res);
+            
             if(res.data.success===true){
                 this.setState({
                     data: res.data.message,

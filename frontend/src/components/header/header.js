@@ -33,7 +33,7 @@ class Header extends react.Component {
                         <Navbar.Brand href="/home"> <img className="logo" src={img} /> <span className="p-2">Lending Platform</span> </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mt-auto mr-auto">
+                        <Nav className="justify-content-end flex-grow-1 pe-3">
                             {
                                 Object.keys(links).map(item => {
                                     return (
@@ -43,6 +43,7 @@ class Header extends react.Component {
                             }
                             {window.sessionStorage.getItem("userid")?logout:""}
                         </Nav>
+                        
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
