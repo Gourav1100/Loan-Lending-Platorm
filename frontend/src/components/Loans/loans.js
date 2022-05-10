@@ -23,54 +23,61 @@ class Loans extends react.Component {
             Data1isLoaded: false,
             nameBorrower: "",
             nameLender: "",
+            nameBorrowerisLoaded: true,
+            nameLenderisLoaded: true,
         };
     }
     componentDidMount(){
         
-        axios.post("http://localhost:5000/api/database",{
+        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
             type: "MoneyLended",
             userid: "6279924a8a48a3dff9e9288f",//window.sessionStorage.getItem("userid"), 
             method: "GET",
         }).then((res) => {
-            axios.post("http://localhost:5000/api/database",{
-                type: "MoneyBorrowed",
-                userid: "6279924a8a48a3dff9e9288f" ,//window.sessionStorage.getItem("userid"), 
-                method: "GET",
-            }).then((res1) => {
-                axios.post("http://localhost:5000/api/database",{
-                        type: "GetUsername",
-                        userid: res.data.message.borrower, 
-                        method: "GET",
-                    }).then((res2) => {
-
-                        axios.post("http://localhost:5000/api/database",{
-                        type: "GetUsername",
-                        userid: res1.data.message.lender, 
-                        method: "GET",
-                    }).then((res3) => {
-                        this.setState({
-                            data: res.data.message,
-                            data1: res1.data.message,
-                            DataisLoaded: true,
-                            Data1isLoaded: true,
-                            nameBorrower: res2.data.message,
-                            nameLender: res1.data.message,
-                    })
-
-                       
-                        })
-                    });
-            });    
-        });
-
-        
-        
+            if(res.data.success===true){
+                axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+                    type: "MoneyBorrowed",
+                    userid: "6279924a8a48a3dff9e9288f" ,//window.sessionStorage.getItem("userid"), 
+                    method: "GET",
+                }).then((res1) => {
+                    if(res1.data.success===true){
+                        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+                                type: "GetUsername",
+                                userid: res.data.message.borrower, 
+                                method: "GET",
+                            }).then((res2) => {
+                                if(res2.data.success===true){
+                                    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+                                        type: "GetUsername",
+                                        userid: res1.data.message.lender, 
+                                        method: "GET",
+                                    }).then((res3) => {
+                                        if(res3.data.success===true){
+                                            this.setState({
+                                                data: res.data.message,
+                                                data1: res1.data.message,
+                                                DataisLoaded: true,
+                                                Data1isLoaded: true,
+                                                nameBorrower: res2.data.message,
+                                                nameLender: res3.data.message,
+                                                nameBorrowerisLoaded: true,
+                                                nameLenderisLoaded: true,
+                                            })
+                                            return true;
+                                        }
+                                    })
+                                }
+                            });
+                    }
+                });
+            }    
+        }); 
     }
 
     
 
     render(props){
-        if(!this.state.DataisLoaded || !this.state.Data1isLoaded)
+        if(!this.state.DataisLoaded || !this.state.Data1isLoaded || !this.state.nameBorrowerisLoaded || !this.state.nameLenderisLoaded)
         {
             return(<>
             <h3>Data is loading</h3>
@@ -87,11 +94,8 @@ class Loans extends react.Component {
                     day = DATE.getDate();
                     month = DATE.getMonth();
                     year = DATE.getFullYear();
-
-
-                    console.log(this.setState.nameBorrower);
                     return (<>
-                        <Lcard bidder={this.setState.nameBorrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={(day + "-"+  month +"-" + year)}/>
+                        <OfferCard lender={this.setState.nameBorrower} amount={item.amount} interestrate={item.interestrate} time={item.time} finaldate={(day + "-"+  month +"-" + year)}/>
                     </>);
                 })
             }
@@ -107,7 +111,7 @@ class Loans extends react.Component {
 
                     
                     return (<>
-                        <OfferCard bidder={this.setState.nameLender} amount={item.amount} interestrate={item.interestrate} time={item.time} finaldate={(day + "-"+  month +"-" + year)} />
+                        <Lcard borrower={this.setState.nameLender} amount={item.amount} interestrate={item.interestrate} time={item.time} date={(day + "-"+  month +"-" + year)} />
                     </>);
                 })
             }

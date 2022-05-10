@@ -23,11 +23,12 @@ class Offer extends react.Component {
             type: "LoanOffer",
             method: "GET",
         }).then((res) => {
-
-        this.setState({
-                data: res.data.message,
-                DataisLoaded: true,
-            })
+            if(res.data.success===true){
+                this.setState({
+                    data: res.data.message,
+                    DataisLoaded: true,
+                });
+            }
         });
     }
     render(props){
