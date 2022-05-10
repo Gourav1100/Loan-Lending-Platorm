@@ -4,7 +4,14 @@ A web application based on node.js with mongoDB database deployed on Microsoft A
 http://loanlendingplatform.centralindia.cloudapp.azure.com:3000
 ```
 
-<br>
+<br>![MoneyLended](https://user-images.githubusercontent.com/92878027/167650114-16a295b6-acdc-432c-8960-b9992f3ad333.jpg)
+![requestCreating](https://user-images.githubusercontent.com/92878027/167650185-8308500e-1fbb-4ca3-8844-25b2e9bc1165.jpg)
+![LoanOffers](https://user-images.githubusercontent.com/92878027/167650192-fd2a6336-5822-4437-bda0-b8d66f38c42d.jpg)
+![salarySlips](https://user-images.githubusercontent.com/92878027/167650198-1609e41f-7e74-4d9d-a91a-28b940652ba0.jpg)
+![profileproject](https://user-images.githubusercontent.com/92878027/167650199-e5075a89-8d74-4fa9-8ed8-43f436b1132c.jpg)
+![MoneyBorrowed](https://user-images.githubusercontent.com/92878027/167650202-88433c6f-6ed6-42f1-ac0d-750de6f99039.jpg)
+![generateRequest](https://user-images.githubusercontent.com/92878027/167650205-95704f1d-e552-4161-8aa5-418f765421d3.jpg)
+
 <h1>The characteristics of the platform are:</h1>
 <ul>
   <li>
