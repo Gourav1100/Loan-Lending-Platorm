@@ -12,7 +12,7 @@ import axios from "axios";
 class Newrequest extends react.Component {
   submit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:5000/api/database",{
+    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
       method: "POST",
       type: "LoanRequest",
       borrower:(window.sessionStorage.getItem("userid")),

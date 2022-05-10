@@ -23,7 +23,7 @@ class Loancard extends react.Component {
         return false;
       }
     }
-    axios.post("http://localhost:5000/api/database",{
+    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
       method: "POST",
       type: "LoanOffer",
       lender:(window.sessionStorage.getItem("userid")),
@@ -38,7 +38,7 @@ class Loancard extends react.Component {
         return true;
       }
     }).then(()=>{
-      axios.post("http://localhost:5000/api/notif",{
+      axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/notif",{
         _id: (this.state.borrower),
         message: `${window.sessionStorage.getItem("email")} has made an offer on your request. ( RequestId: ${this.state.requestid} )`,
         subject: "Offer on loan request."

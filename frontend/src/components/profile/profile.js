@@ -26,7 +26,7 @@ class Profile extends react.Component {
     else if(event.target[0].name==="sslips"){
       window.sessionStorage.setItem("sslip",event.target[0].value);
     }
-    axios.post("http://localhost:5000/api/database",{
+    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
       method: "PUT",
       type: "Users",
       _id: window.sessionStorage.getItem("userid"),

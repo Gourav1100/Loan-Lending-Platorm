@@ -17,7 +17,7 @@ class Market extends react.Component {
         };
     }
     componentDidMount(){
-        axios.post("http://localhost:5000/api/database",{
+        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
             type: "Market",
             method: "GET",
         }).then((res) => {

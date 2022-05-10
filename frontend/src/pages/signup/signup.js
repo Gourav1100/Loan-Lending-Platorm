@@ -27,7 +27,7 @@ class Signup extends react.Component {
         return false;
       }
     }
-    axios.post("http://localhost:5000/api/database",{
+    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
       method: "POST",
       type: "Users",
       username: event.target.username.value,
