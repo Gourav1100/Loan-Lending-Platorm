@@ -4,6 +4,10 @@ A web application based on node.js with mongoDB database deployed on Microsoft A
 http://loanlendingplatform.centralindia.cloudapp.azure.com:3000
 ```
 
+The Database and the flow chart for the website is represented as:
+<br>
+![Database](https://user-images.githubusercontent.com/77623755/167654827-a254250c-85a3-427a-b0ea-ff14b5426cec.jpeg)
+
 <br>
 
 <h1>The characteristics of the platform are:</h1>
