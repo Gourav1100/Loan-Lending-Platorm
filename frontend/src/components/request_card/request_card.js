@@ -21,9 +21,9 @@ class RequestCard extends react.Component {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>Amount</th>
-                    <th>Interest Rate</th>
-                    <th>Borrowing Period</th>
+                    <th>Amount (INR)</th>
+                    <th>Interest Rate (%)</th>
+                    <th>Borrowing Period (yrs)</th>
                     <th>Disposal Date</th>
                   </tr>
                 </thead>

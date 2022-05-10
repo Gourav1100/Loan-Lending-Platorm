@@ -18,7 +18,7 @@ class Login extends react.Component {
       alert("Plase Fill all the Fields.");
       return false;
     }
-    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+    axios.post("http://localhost:5000/api/database",{
       type: "Login",
       method: "GET",
       email: event.target.email.value,
@@ -87,9 +87,7 @@ class Login extends react.Component {
                     Login
                   </button>
                   <hr className="h_break" />
-                  <div style={{"font-size": "1.2em"}}>
-                  Didn't have an account ? <a id="signup" href="/signup">SignUp</a>
-                  </div>
+                  <h4 className="center">Didn't have an account ? <a className="link" href = "/signup">SignUp</a></h4>
                 </Stack>
               </form>
             </Col>

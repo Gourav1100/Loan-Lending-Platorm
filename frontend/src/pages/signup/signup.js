@@ -6,6 +6,13 @@ import Header from "../../components/header/header";
 // icons
 import userimg from "../../icons/user.png";
 import padlock from "../../icons/padlock.png";
+import phone from "../../icons/phone.png";
+import email from "../../icons/email.png";
+import home from "../../icons/home.png"
+import pin from "../../icons/pin.png"
+import card from "../../icons/card.png"
+import bank from "../../icons/bank.png"
+import growth from "../../icons/growth.png"
 import axios from "axios";
 // css
 import "../../common.css";
@@ -20,7 +27,7 @@ class Signup extends react.Component {
         return false;
       }
     }
-    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+    axios.post("http://localhost:5000/api/database",{
       method: "POST",
       type: "Users",
       username: event.target.username.value,
@@ -40,7 +47,6 @@ class Signup extends react.Component {
       icode: event.target.icode.value,
       ctc: event.target.ctc.value,
     }).then((res)=>{
-      console.log(res);
       if(res.data.success === true){
         alert("User added successfully !");
         window.location.replace("/login");
@@ -65,7 +71,7 @@ class Signup extends react.Component {
               <form onSubmit={this.submit}>
 
                 <Stack gap={2}>
-
+                  <br />
                   <h2 style={{"width": "100%", "text-align": "center"}}>Personal Details</h2>
                   <InputGroup className="mb-3 ">
                     <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
@@ -98,7 +104,7 @@ class Signup extends react.Component {
                   </InputGroup>
 
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={phone}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Phone"
                       name = "phone"
@@ -108,7 +114,7 @@ class Signup extends react.Component {
                   </InputGroup>
 
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={email}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Email"
                       name="email"
@@ -118,7 +124,7 @@ class Signup extends react.Component {
                   </InputGroup>
 
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={home}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Address"
                       name="address"
@@ -128,7 +134,7 @@ class Signup extends react.Component {
                   </InputGroup>
 
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={pin}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Country"
                       name="country"
@@ -138,7 +144,7 @@ class Signup extends react.Component {
                   </InputGroup>
 
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={card}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Aadhaar Number"
                       aria-label="aadharnum"
@@ -148,7 +154,7 @@ class Signup extends react.Component {
                   </InputGroup>
 
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={card}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Pan Number"
                       aria-label="pannum"
@@ -156,11 +162,11 @@ class Signup extends react.Component {
                       aria-describedby="basic-addon1"
                     />
                   </InputGroup>
-
+                    <hr className="h_break"></hr>
                   <h2 style={{"width": "100%", "text-align": "center"}} className="mt-4 mb-4">Bank Details</h2>
 
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={bank}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Bank Name"
                       name="bankname"
@@ -169,7 +175,7 @@ class Signup extends react.Component {
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={card}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Account Number"
                       name="accountno"
@@ -178,7 +184,7 @@ class Signup extends react.Component {
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={bank}></img></InputGroup.Text>
                     <FormControl
                       placeholder="Branch"
                       name="branch"
@@ -187,7 +193,7 @@ class Signup extends react.Component {
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={card}></img></InputGroup.Text>
                     <FormControl
                       placeholder="IFSC code"
                       name="icode"
@@ -196,7 +202,7 @@ class Signup extends react.Component {
                     />
                   </InputGroup>
                   <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={userimg}></img></InputGroup.Text>
+                    <InputGroup.Text id="basic-addon1"><img alt="form_image" className="img_size" src={growth}></img></InputGroup.Text>
                     <FormControl
                       placeholder="CTC"
                       name="ctc"
@@ -209,13 +215,14 @@ class Signup extends react.Component {
                     type="submit" value="signup">
                     SignUp
                   </button>
+                  <h4 className="center">Already have an account ? <a className="link" href = "/login">Login</a></h4> 
                 </Stack>
               </form>
             </Col>
-
+          
             <Col xs={{ span: 1 }} md={{ span: 2 }} lg={{span: 3}} xl={{span: 4}}/>
           </Row>
-
+        
         </Container>
         <Footer />
 

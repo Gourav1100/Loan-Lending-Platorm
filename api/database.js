@@ -20,6 +20,7 @@ async function get(req,res){
             rdata = await db.collection("Users").findOne({email : query.email, password: query.password});
         }
         else if (query.type == "MoneyLended"){
+            console.log("here");
             rdata = await db.collection("LoanHistory").find({lender: Mongodb.ObjectID(query.userid)}).toArray();
         }
         else if (query.type == "MoneyBorrowed"){
@@ -334,6 +335,7 @@ async function handler(req, res){
             response = await update(req, res);
             break;
     }
+    console.log(response);
     console.log(`API response : ${response.success}`);
     return res.status(200).json(response);
 }

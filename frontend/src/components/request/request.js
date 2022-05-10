@@ -21,13 +21,12 @@ class Request extends react.Component {
         };
     }
     componentDidMount(){
-        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
-            type: "LoanRequest",
+        axios.post("http://localhost:5000/api/database",{
+            type: "RequestHistory",
             method: "GET",
             borrower: window.sessionStorage.getItem("userid")
         }).then((res) => {
             if(res.data.success===true){
-                console.log(res);
                 this.setState({
                     data: res.data.message,
                     DataisLoaded: true,
@@ -50,7 +49,7 @@ class Request extends react.Component {
                         return <RequestCard 
                         amount = {item.amount}
                         interestrate = {item.interestrate}
-                        date = {item.date}
+                        time = {item.time}
                         finaldate = {item.finaldate}
                     />
                     })
