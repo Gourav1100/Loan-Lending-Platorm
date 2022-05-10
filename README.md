@@ -126,7 +126,6 @@ http://loanlendingplatform.centralindia.cloudapp.azure.com:3000
   </ul>
   </li>
   
-  <li>
 <li>
   <b>Bidding</b>
   </li>
