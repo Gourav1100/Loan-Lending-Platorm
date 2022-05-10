@@ -2,6 +2,8 @@ const URI = "mongodb+srv://manchurianhotdog:VUpYHt2jaG9IiRW4@fliprr.jbq9y.mongod
 const Mongodb = require("mongodb");
 const client = new Mongodb.MongoClient(URI);
 const url = require("url");
+var EMIGen = require("../modules/emi.js");
+var Cibil = require("../modules/cibil.js");
 
 async function PayEMI(req, res){
     try {
@@ -16,8 +18,8 @@ async function PayEMI(req, res){
         emi.emileft -= 1;
         if (emi.emileft == 0){
             await db.collection("LoanHistory").updateOne({_id : Mongodb.ObjectID(emi.loanid)}, {$set:{paid:true}});
-            let bor = db.collection("Users").find({_id: Mongodb.ObjectID(emi.borrower)}).toArray()[0].loansrepaid + 1;
-            await db.collection("Users").updateOne({_id: Mongodb.ObjectID(emi.borrower)}, {$set: {loansrepaid : bor}});
+            let bor = db.collection("Users").find({_id: Mongodb.ObjectID(emi.borrower)}).toArray()[0];
+            await db.collection("Users").updateOne({_id: Mongodb.ObjectID(emi.borrower)}, {$set: {loansrepaid : bor.loansrepaid + 1, cibil: Cibil.cibil(bor.noloans, bor.loansrepaid + 1)}});
             await db.collection("ActiveLoans").deleteOne({_id: Mongodb.ObjectID(emi._id)});
         }
         await db.collection("ActiveLoans").updateOne({_id : Mongodb.ObjectID(query)}, {$set: {dateofemi: new Date(emi.dateofemi), emileft: emi.emileft}});

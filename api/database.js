@@ -110,11 +110,6 @@ async function update(req, res) {
 
         }
         else if(query.type === "LoanOffer"){
-            udata = {
-                offerid: query.offerid,
-                accepted: query.accepted,
-            }
-            console.log(query.accepted);
             if (query.accepted === "true"){
                 let offer = await db.collection("LoanOffer").findOne({"_id" : Mongodb.ObjectID(query.offerid)});
                 let adata = {
@@ -145,10 +140,37 @@ async function update(req, res) {
                     dateofemi: d,
                 }
                 await db.collection("ActiveLoans").insertOne(adata);
+                let req = await db.collection("LoanRequest").findOne({"_id":Mongodb.ObjectID(offer.requestid)});
+                req = req.offeres;
+
+                for (var i = 0; i < req.length; i++){
+                    await db.collection("LoanOffer").deleteOne({"_id":req[i]});
+                }
+                await db.collection("LoanRequest").deleteOne({"_id":offer.requestid});
+                adata = {
+                    requestid: offer.requestid,
+                    borrower: offer.borrower,
+                    accepted: true,
+                    interestrate: parseFloat(offer.interestrate),
+                    amount: parseInt(offer.amount),
+                    time: parseInt(offer.time),
+                    finaldate: new Date(),
+                }
+                await db.collection("RequestHistory").insertOne(adata);
                 return {
                     message: 'Data updated successfully',
                     success: true,
                 };
+            }
+            else{
+                let reqid = await db.collection("LoanOffer").findOne({"_id": Mongodb.ObjectID(query.offerid)})
+                await db.collection("LoanOffer").deleteOne({"_id": Mongodb.ObjectID(query.offerid)});
+                let req = await db.collection("LoanRequest").findOne({"_id":reqid.requestid});
+                console.log(req)
+                let ofr = req.offeres;
+                let ind = ofr.indexOf(Mongodb.ObjectID(query.offerid));
+                ofr.splice(ind, 1);
+                await db.collection("LoanRequest").updateOne({"_id": req._id}, {$set : {offeres: ofr}});
             }
         }
         else if(query.type === "ActiveLoans"){
