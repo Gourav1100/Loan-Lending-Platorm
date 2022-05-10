@@ -31,12 +31,14 @@ class Loans extends react.Component {
             method: "GET",
         }).then((res) => {
             if(res.data.success===true){
+                console.log(res);
                 axios.post("http://localhost:5000/api/database",{
                     type: "MoneyBorrowed",
                     userid: window.sessionStorage.getItem("userid"), 
                     method: "GET",
                 }).then((res1) => {
                     if(res1.data.success===true){
+                        console.log(res1);
                         var flag = (res.data.message===[]?false:true);
                         this.setState({
                             data: res.data.message,

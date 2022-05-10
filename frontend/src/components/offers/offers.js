@@ -21,9 +21,11 @@ class Offer extends react.Component {
     componentDidMount(){
         axios.post("http://localhost:5000/api/database",{
             type: "LoanOffer",
+            borrower: window.sessionStorage.getItem("userid"),
             method: "GET",
         }).then((res) => {
             if(res.data.success===true){    
+                console.log(res);
                 this.setState({
                     data: res.data.message,
                     DataisLoaded: true,
