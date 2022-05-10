@@ -226,6 +226,7 @@ async function add(req, res) {
                 notifications: [],
                 noloans: query.noloans,
                 loansrepaid: query.loansrepaid,
+                datecreated: new Date(),
             }
         }
         else if( query.type === "LoanHistory" ) {

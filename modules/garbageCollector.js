@@ -70,5 +70,29 @@ async function EMIPenalty(req, res){
         });
     }
 }
+
+async function sslipcond(req, res){
+    try{
+        var d = new Date();
+        d.setHours(0,0,0);
+        d.setDate(d.getDate() - 2);
+        await client.connect();
+        const db = client.db("Flipr");
+        await db.collection("Users").deleteMany({"datecreated" : {$lt : d}}); 
+        return res.status(200).json({
+            success: true,
+            message: "success",
+        });
+    } catch (err) {
+        // return the error
+        return res.status(200).json({
+            message: new err.message,
+            success: false,
+        });
+    }
+
+}
+
 exports.Beyond20days = Beyond20days;
 exports.EMIPenalty = EMIPenalty;
+exports.sslipcond = sslipcond;
