@@ -11,8 +11,8 @@ A web application based on node.js with mongoDB database deployed on Microsoft A
   <li>
     <b>Secure and efficient mangement of data :</b>
     <br>
-   <p> The data is easily available on the user profile. Borrower can reach a large audience at once and thus his/her chance of getting an optimal offer are increased. </p>
-    <p>The user login is secured in the databse with his password being stored as a hash value. </p>
+    <p> The data is easily available on the user profile. Borrower can <b>reach a large audience </b>at once and thus his/her chance of getting an optimal offer are increased. </p>
+    <p>The user login is secured in the database with his password being stored as a hash value. </p>
   </li>
   <li>
     <b>Secured Investment: </b>
@@ -26,7 +26,7 @@ A web application based on node.js with mongoDB database deployed on Microsoft A
   <li>
     <b>Login and SignUp</b>
     <br>
-     Exisiting users can access the website using login, while new users must sign up. The sign up is a <b>two step process</b>. The user is promted to upload his photo and salary slips after 24 hours of the registration time, if he fails to do so, the user is deleted. This ensure <b>no bogus accounts </b>are created.
+     Exisiting users can access the website using login, while new users must sign up. The sign up is a <b>two step process</b>. The user is prompted to upload his photo and salary slips within 24 hours of the registration time, if he fails to do so, the user is deleted. This ensure <b>no bogus accounts </b>are created.
   </li>
   
   <li>
