@@ -99,7 +99,6 @@ async function update(req, res) {
         }
         else if(query.type === "LoanRequest"){
             udata = {
-                requestid: query.requestid,
                 borrower: query.borrower,
                 amount: query.amount,
                 interestrate: query.interestrate,
@@ -242,8 +241,7 @@ async function add(req, res) {
         }
         else if(query.type === "LoanRequest"){
             adata = {
-                requestid: query.requestid,
-                borrower: query.borrower,
+                borrower: Mongodb.ObjectID(query.borrower),
                 amount: query.amount,
                 interestrate: query.interestrate,
                 time:query.time,
