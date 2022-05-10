@@ -6,19 +6,28 @@ import axios from "axios";
 class Loancard extends react.Component {
   submit = (event) => {
     event.preventDefault();
+    if(!window.sessionStorage.getItem("userid")){
+      window.location.replace("/login");
+      return false;
+    }
+    for(var i=0;i<event.target.length - 1;i++){
+      if(event.target[i].value==="" || event.target[i].value===null){
+        alert(`Enter the required field: ${event.target[i].name}`)
+        return false;
+      }
+    }
     axios.post("http://localhost:5000/api/database",{
       method: "POST",
       type: "LoanOffer",
       lender:(window.sessionStorage.getItem("userid")),
       borrower:(this.props.borrower), 
       requestid : (this.props.requestid),
-      amount: event.target.amount.value,
+      amount: event.target.amt.value,
       interestrate: event.target.interestrate.value,
       time: event.target.borrowingperiod.value
     }).then((res)=>{
       if(res.data.success === true){
         alert("Loan Offer sent successfully !");
-        window.location.reload();
         return true;
       }
     })
@@ -49,20 +58,22 @@ class Loancard extends react.Component {
                     <td>{this.props.time}</td>
                     <td>{this.props.date}</td>
                   </tr>
-                  <tr>
-                    <td></td>
-                    
-                    <td><InputGroup className="mb-3">
+                  </tbody>
+              </Table>
+                  <form onSubmit={this.submit}>
+                  {/* <tr> */}
+                    {/* <td></td> */}
+                    <InputGroup className="mb-3">
                       <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                       <FormControl
-                      name = "amount"
+                      name = "amt"
                         placeholder="Amount"
                         aria-label="Amount"
                         aria-describedby="basic-addon1"
                         type="number"
                       />
-                    </InputGroup></td>
-                    <td><InputGroup className="mb-3">
+                    </InputGroup>
+                    <InputGroup className="mb-3">
                       <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                       <FormControl
                       name= "interestrate"
@@ -71,8 +82,8 @@ class Loancard extends react.Component {
                         aria-describedby="basic-addon1"
                         type="number"
                       />
-                    </InputGroup></td>
-                    <td><InputGroup className="mb-3">
+                    </InputGroup>
+                    <InputGroup className="mb-3">
                       <InputGroup.Text id="basic-addon1"></InputGroup.Text>
                       <FormControl
                       name = "borrowingperiod"
@@ -81,17 +92,13 @@ class Loancard extends react.Component {
                         aria-describedby="basic-addon1"
                         type="number"
                       />
-                    </InputGroup></td>
-                    <td>{this.props.date}</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </Table>
+                    </InputGroup>
+                    <button className="button_bg p-2 mt-1" type="submit">
+                      <h6>Place a Bid</h6>
+                    </button>
+                    </form>
             </Card.Text>
             <hr className=""></hr>
-            <button className="button_bg p-2 mt-1" onClick={this.submit}>
-              <h6>Place a Bid</h6>
-            </button>
           </Card.Body>
         </Card> 
         <hr className="h_break"></hr>

@@ -28,7 +28,6 @@ class Market extends react.Component {
                 })
                 return true;
             }
-            alert(`Error: ${res.data.message}`);
             return false;
         });
     }
@@ -44,7 +43,7 @@ class Market extends react.Component {
                     {
                         data.map((item)=>{
                             return (<>
-                                <Loancard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} />
+                                <Loancard borrower={item.borrower} amount={item.amount} interestrate={item.interestrate} time={item.time} date={item.date} requestid = {item.requestid} />
                             </>);
                         })
                     }

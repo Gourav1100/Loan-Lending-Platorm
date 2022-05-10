@@ -4,8 +4,14 @@ import "./header.css";
 import img from "../../icons/loan.png";
 
 class Header extends react.Component {
+    logout = () => {
+        window.sessionStorage.clear();
+        window.location.replace("/");
+        return true;
+    }
     render(props){
         var links = {};
+        let logout = (<Nav.Link onClick={this.logout} className="button_bg p-2">Logout</Nav.Link>);;
         if ( window.sessionStorage.getItem("userid") === null || window.sessionStorage.getItem("userid") === "" ){
             links = {
                 "Home"      :   '/home',
@@ -27,7 +33,7 @@ class Header extends react.Component {
                         <Navbar.Brand href="/home"> <img className="logo" src={img} /> <span className="p-2">Lending Platform</span> </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
+                        <Nav className="mt-auto mr-auto">
                             {
                                 Object.keys(links).map(item => {
                                     return (
@@ -35,6 +41,7 @@ class Header extends react.Component {
                                     );
                                 })
                             }
+                            {window.sessionStorage.getItem("userid")?logout:""}
                         </Nav>
                         </Navbar.Collapse>
                     </Container>

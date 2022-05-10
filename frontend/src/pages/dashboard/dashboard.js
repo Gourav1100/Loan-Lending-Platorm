@@ -18,8 +18,8 @@ class Dashboard extends react.Component {
     }
     return (
       <>
-        <Dheader username = {window.sessionStorage.getItem("username")? window.sessionStorage.getItem("username") : "User"} />
-        <Container className="bg-dark flex-column mt-2 p-2">
+        <Dheader username = {window.sessionStorage.getItem("name")? window.sessionStorage.getItem("name") : "User"} />
+        <Container className="bg-dark flex-column mt-4 mb-4 p-5">
           <Row>
             <Col>
               <Tabs
@@ -43,6 +43,8 @@ class Dashboard extends react.Component {
                     ctc={window.sessionStorage.getItem("ctc")}
                     activeloans={window.sessionStorage.getItem("activeloans")}
                     completedloans={window.sessionStorage.getItem("completedloans")}
+                    image={window.sessionStorage.getItem("avatar")}
+                    sslip={window.sessionStorage.getItem("sslip")}
                   />
                 </Tab>
                 <Tab eventKey="home" title="Requests">

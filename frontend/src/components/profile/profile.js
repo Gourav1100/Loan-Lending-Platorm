@@ -6,99 +6,147 @@ import {
   Container,
   InputGroup,
   FormControl,
-  Stack
+  Stack,
 } from "react-bootstrap";
 import profile from "../../icons/profile.png";
+import axios from "axios";
 
 class Profile extends react.Component {
+  submit = (event) =>{
+    event.preventDefault();
+    for(var i=0;i<event.target.length-1;i++){
+      if(event.target[i].value==="" || event.target[i].value===null){
+        alert("Please enter the required URL !");
+        return false;
+      }
+    }
+    if(event.target[0].name==="avatar"){
+      window.sessionStorage.setItem("avatar",event.target[0].value);
+    }
+    else if(event.target[0].name==="sslips"){
+      window.sessionStorage.setItem("sslip",event.target[0].value);
+    }
+    axios.post("http://localhost:5000/api/database",{
+      method: "PUT",
+      type: "Users",
+      _id: window.sessionStorage.getItem("userid"),
+      name: window.sessionStorage.getItem("name"),
+      username: window.sessionStorage.getItem("username"),
+      phone: window.sessionStorage.getItem("phone"),
+      email: window.sessionStorage.getItem("email"),
+      address: window.sessionStorage.getItem("address"),
+      loanrepaid: window.sessionStorage.getItem("completedloans"),
+      country: window.sessionStorage.getItem("country"),
+      aadharnum: window.sessionStorage.getItem("aadhar"),
+      pannum: window.sessionStorage.getItem("pan"),
+      bankname: window.sessionStorage.getItem("bank"),
+      branch: window.sessionStorage.getItem("branch"),
+      icode: window.sessionStorage.getItem("ifsc"),
+      ctc: window.sessionStorage.getItem("ctc"),
+      noloans: window.sessionStorage.getItem("activeloans"),
+      photo: window.sessionStorage.getItem("avatar"),
+      sslip: window.sessionStorage.getItem("sslip"),
+    }).then(res=>{
+      if(res.data.success===true){
+        window.location.reload();
+        return true;
+      }
+      return false;
+    })
+  }
   tab = (<>&ensp;&emsp;</>);
   two_space = (<>&ensp;</>);
   one_space = (<>&nbsp;</>);
   four_space = (<>&emsp;</>);
   render(props) {
+    console.log(this.props.sslip==='null')
     return (
       <Container>
         <Row>
-          <Col md={{ span: 5 }} className="center mt-5 p-5">
-            <img src= {this.props.image? this.props.image : profile} className="fit center"></img>
-            <InputGroup className="mb-3 p-2">
-                    <InputGroup.Text id="basic-addon1">Avatar </InputGroup.Text>
-                    <FormControl
-                      type="file"
-                      name="avatar"
-                      onChange={this.loadimages}
-                      aria-label="sslips"
-                      aria-describedby="basic-addon1"
-                    />
-                    <button
-                    className="button_bg p-2"
-                    type="submit">
-                    Submit
-                  </button>
-                  </InputGroup>
+          <Col md={{ span: 5 }} className="center mt-5 mb-5">
+            <img
+              src={(this.props.image==="" || this.props.image===null || this.props.image==="null") ? profile : this.props.image}
+              className="fit center p-3"
+              style={{"border-radius":"50%","height":"200px","width":"200px"}}
+            ></img>
+            <form onSubmit={this.submit}>
+              <InputGroup className="mb-3 p-2">
+                <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                <FormControl
+                  type="link"
+                  name="avatar"
+                  placeholder="URL for avatar"
+                  aria-label="sslips"
+                  aria-describedby="basic-addon1"
+                />
+                <button className="button_bg p-2" type="submit">
+                  Submit
+                </button>
+              </InputGroup>
+            </form>
           </Col>
           <Col className=" p-1 mt-2">
             <h1 className="center">Personal Details</h1>
             <hr className="h_break"></hr>
             <br></br>
-            <h5>
+            <h6>
               Name{this.tab}
               {this.tab}
               {this.two_space}:{this.tab}
               {this.tab}
               {this.props.name}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Username{this.tab}:{this.tab}
               {this.tab}
               {this.props.username}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Phone{this.tab}
               {this.tab}
               {this.one_space}:{this.tab}
               {this.tab}
               {this.props.phone}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Email{this.tab}
               {this.tab}
               {this.two_space}
               {this.one_space}:{this.tab}
               {this.tab}
               {this.props.Email}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Address{this.tab}
               {this.four_space}:{this.tab}
               {this.tab}
               {this.props.address}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Country{this.tab}
               {this.four_space}:{this.tab}
               {this.tab}
               {this.props.country}
-            </h5>
+            </h6>
             <br></br>
             <br></br>
             <hr className="h_break"></hr>
             <h1 className="center">Bank Details</h1>
             <hr className="h_break"></hr>
             <br></br>
-            <h5>
+            <h6>
               Aadhar Number{this.tab}:{this.tab}
               {this.tab}
               {this.props.aadhar}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               PAN Number{this.tab}
               {this.four_space}
               {this.one_space}:{this.tab}
               {this.tab}
               {this.props.pan}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Bank{this.tab}
               {this.tab}
               {this.tab}
@@ -106,16 +154,16 @@ class Profile extends react.Component {
               {this.two_space}:{this.tab}
               {this.tab}
               {this.props.bank}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Branch{this.tab}
               {this.tab}
               {this.tab}
               {this.four_space}:{this.tab}
               {this.tab}
               {this.props.branch}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               IFSC Code{this.tab}
               {this.tab}
               {this.two_space}
@@ -123,8 +171,8 @@ class Profile extends react.Component {
               {this.one_space}:{this.tab}
               {this.tab}
               {this.props.ifsc}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               CTC{this.tab}
               {this.tab}
               {this.tab}
@@ -133,49 +181,53 @@ class Profile extends react.Component {
               {this.two_space}:{this.tab}
               {this.tab}
               {this.props.ctc}
-            </h5>
+            </h6>
             <br></br>
             <br></br>
             <hr className="h_break"></hr>
             <h1 className="center">Loan Details</h1>
             <hr className="h_break"></hr>
-            <h5>
+            <h6>
               Active Loans{this.tab}
               {this.tab}
               {this.two_space}
               {this.one_space}:{this.tab}
               {this.tab}
               {this.props.activeloans}
-            </h5>
-            <h5>
+            </h6>
+            <h6>
               Completed Loans{this.tab}:{this.tab}
               {this.tab}
               {this.props.completedloans}
-            </h5>
+            </h6>
             <br />
-            <hr className = "h_break"></hr>
+            <hr className="h_break"></hr>
             <h1 className="center">Update Salary Slips</h1>
             <br />
-            <form className="center">
-            <InputGroup className="mb-3 ">
-                    <InputGroup.Text id="basic-addon1">Salary Slip </InputGroup.Text>
-                    <FormControl
-                      type="file"
-                      name="sslips"
-                      onChange={this.loadimages}
-                      aria-label="sslips"
-                      aria-describedby="basic-addon1"
-                      multiple
-                    />
-                    <button
-                    className="button_bg p-2"
-                    type="submit">
-                    Submit
-                  </button>
-                  </InputGroup>
-
-
-                  </form>
+            <h6>
+              Salary Slips{this.tab}:{this.tab}
+              {this.tab}
+              <a className="signup" href={(this.props.sslip==="" || this.props.sslip===null || this.props.sslip==="null")?"":this.props.sslip }> 
+                {(this.props.sslip==="" || this.props.sslip===null || this.props.sslip==="null")?"No Link is available":"Link to data"} 
+              </a>
+            </h6>
+            <form onsubmit={this.submit} className="center">
+              <InputGroup className="mb-3 ">
+                <InputGroup.Text id="basic-addon1">
+                  @
+                </InputGroup.Text>
+                <FormControl
+                  type="link"
+                  name="sslips"
+                  placeholder="URL for salary slip / s"
+                  aria-label="sslips"
+                  aria-describedby="basic-addon1"
+                />
+                <button className="button_bg p-2" type="submit">
+                  Submit
+                </button>
+              </InputGroup>
+            </form>
           </Col>
         </Row>
       </Container>

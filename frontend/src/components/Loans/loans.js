@@ -57,7 +57,7 @@ class Loans extends react.Component {
     render(props){
         var renderElement = (
             <>
-            <h3 className="p-2 mt-4" >Money Lended</h3>
+            <h3 className="p-2 mt-4" >Money Borrowed</h3>
             {
                 this.state.data.map((item)=>{
                     var DATE = new Date (item.date);
@@ -71,7 +71,7 @@ class Loans extends react.Component {
                 })
             }
           
-            <h3 className="p-2 mt-4" >Money Borrowed</h3>
+            <h3 className="p-2 mt-4" >Money Lended</h3>
             {
                 this.state.data.map((item)=>{
                     var DATE = new Date (item.date);

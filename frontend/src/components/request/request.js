@@ -22,11 +22,12 @@ class Request extends react.Component {
     }
     componentDidMount(){
         axios.post("http://localhost:5000/api/database",{
-            type: "RequestHistory",
+            type: "LoanRequest",
             method: "GET",
             borrower: window.sessionStorage.getItem("userid")
         }).then((res) => {
             if(res.data.success===true){
+                console.log(res);
                 this.setState({
                     data: res.data.message,
                     DataisLoaded: true,

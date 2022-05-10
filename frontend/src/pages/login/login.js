@@ -40,6 +40,8 @@ class Login extends react.Component {
         window.sessionStorage.setItem("ifsc",res.data.message.icode);
         window.sessionStorage.setItem("ctc",res.data.message.ctc);
         window.sessionStorage.setItem("activeloans",res.data.message.noloans);
+        window.sessionStorage.setItem("avatar",res.data.message.photo);
+        window.sessionStorage.setItem("sslip", res.data.message.sslip);
         window.location.replace("/dashboard");
         return true;
       }
@@ -87,7 +89,7 @@ class Login extends react.Component {
                     Login
                   </button>
                   <hr className="h_break" />
-                  <h4 className="center">Didn't have an account ? <a className="link" href = "/signup">SignUp</a></h4>
+                  <h4 className="center">Didn't have an account ? <a className="signup" href = "/signup">SignUp</a></h4>
                 </Stack>
               </form>
             </Col>
