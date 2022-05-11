@@ -152,6 +152,10 @@ async function update(req, res) {
                     emileft: parseInt(offer.time),
                     dateofemi: d,
                 }
+                let usr = await db.collection("Users").findOne({_id : Mongodb.ObjectID(offer.borrower)});
+                usr = parseInt(usr.noloans);
+                usr += 1;
+                await db.collection("Users").updateOne({_id: Mongodb.ObjectID(offer.borrower)}, {$set: {noloans : usr}});
                 await db.collection("ActiveLoans").insertOne(adata);
                 let req = await db.collection("LoanRequest").findOne({"_id":Mongodb.ObjectID(offer.requestid)});
                 req = req.offeres;
