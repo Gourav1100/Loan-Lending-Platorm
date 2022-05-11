@@ -42,6 +42,7 @@ class Login extends react.Component {
         window.sessionStorage.setItem("activeloans",res.data.message.noloans);
         window.sessionStorage.setItem("avatar",res.data.message.photo);
         window.sessionStorage.setItem("sslip", res.data.message.sslip);
+        window.sessionStorage.setItem("cibil", res.data.message.cibil);
         window.location.replace("/dashboard");
         return true;
       }

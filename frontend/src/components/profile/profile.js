@@ -181,6 +181,14 @@ class Profile extends react.Component {
               {this.two_space}:{this.tab}
               {this.tab}
               {this.props.ctc}
+              Cibil{this.tab}
+              {this.tab}
+              {this.tab}
+              {this.tab}
+              {this.two_space}
+              {this.two_space}:{this.tab}
+              {this.tab}
+              {this.props.cibil}
             </h6>
             <br></br>
             <br></br>

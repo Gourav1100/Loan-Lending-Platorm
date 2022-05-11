@@ -40,7 +40,7 @@ async function SendMail(req, res){
       som = som.email;
       var mailOptions = {
         from: 'fliprhackathonfullstack@gmail.com',
-        to: "gouravb1100@gmail.com",
+        to: som,
         subject: req.body.subject,
         text: req.body.message,
       };

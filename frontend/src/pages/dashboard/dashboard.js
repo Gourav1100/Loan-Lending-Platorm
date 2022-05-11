@@ -45,6 +45,7 @@ class Dashboard extends react.Component {
                     completedloans={window.sessionStorage.getItem("completedloans")}
                     image={window.sessionStorage.getItem("avatar")}
                     sslip={window.sessionStorage.getItem("sslip")}
+                    cibil={window.sessionStorage.getItem("cibil")}
                   />
                 </Tab>
                 <Tab eventKey="home" title="Requests">
