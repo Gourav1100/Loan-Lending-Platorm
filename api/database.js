@@ -96,9 +96,9 @@ async function update(req, res) {
                 icode: query.icode,
                 ctc: query.ctc,
                 sslip: query.sslip,
-                notifications: query.notifications,
-                noloans: query.noloans,
-                loansrepaid: query.loansrepaid,
+                notifications: rdata.notifications,
+                noloans: rdata.noloans,
+                loansrepaid: rdata.loansrepaid,
             }
         }
         else if( query.type === "LoanHistory" ) {
