@@ -18,7 +18,7 @@ class Login extends react.Component {
       alert("Plase Fill all the Fields.");
       return false;
     }
-    axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+    axios.post("https://loan-lending-backend.adityasingh208.repl.co/api/database",{
       type: "Login",
       method: "GET",
       email: event.target.email.value,

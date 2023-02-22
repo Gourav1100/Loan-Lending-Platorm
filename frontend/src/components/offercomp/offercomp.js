@@ -16,7 +16,7 @@ class OfferComp extends react.Component {
   }
 
     accept = () =>{
-      axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+      axios.post("https://loan-lending-backend.adityasingh208.repl.co/api/database",{
         method: "PUT",
         type: "LoanOffer",
         accepted: "true",
@@ -33,7 +33,7 @@ class OfferComp extends react.Component {
       });
     }
     reject = () =>{
-        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+        axios.post("https://loan-lending-backend.adityasingh208.repl.co/api/database",{
           method: "PUT",
           type: "LoanOffer",
           accepted: "false",

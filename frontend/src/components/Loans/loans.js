@@ -25,7 +25,7 @@ class Loans extends react.Component {
     }
     componentDidMount(){
         
-        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+        axios.post("https://loan-lending-backend.adityasingh208.repl.co/api/database",{
             type: "MoneyLended",
             userid: window.sessionStorage.getItem("userid"), 
             method: "GET",
@@ -38,7 +38,7 @@ class Loans extends react.Component {
                 });
             }    
         }); 
-        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+        axios.post("https://loan-lending-backend.adityasingh208.repl.co/api/database",{
             type: "MoneyBorrowed",
             userid: window.sessionStorage.getItem("userid"), 
             method: "GET",

@@ -16,7 +16,7 @@ class OfferCard extends react.Component {
   }
 
     clicked = () =>{
-      axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/payemi",{
+      axios.post("https://loan-lending-backend.adityasingh208.repl.co/api/payemi",{
         method: "POST",
         _id :  this.state._id,
     }).then((res) => {

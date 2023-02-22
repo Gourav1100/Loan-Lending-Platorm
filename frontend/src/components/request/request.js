@@ -21,7 +21,7 @@ class Request extends react.Component {
         };
     }
     componentDidMount(){
-        axios.post("http://loanlendingplatform.centralindia.cloudapp.azure.com:5000/api/database",{
+        axios.post("https://loan-lending-backend.adityasingh208.repl.co/api/database",{
             type: "LoanRequest",
             method: "GET",
             borrower: window.sessionStorage.getItem("userid")
